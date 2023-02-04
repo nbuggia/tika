@@ -1,0 +1,34 @@
+---
+title: Git Quick Reference
+---
+
+tips:
+
+* Use present tense in git commit messages
+* Use a branch whenever you are making big code changes 
+
+create a new branch
+
+	$ git checkout -b my-new-branch-name
+	Switched to new branch 'my-new-branch-name'
+	$ git branch
+	master
+	* my-new-branch-name
+
+merge new branch back into main
+
+	$ git add .
+	$ git commit -m 'Changes file foobar'
+	$ git checkout master
+	Switched to branch 'master'
+	$ git merge my-new-branch-name
+	$ git branch -d my-new-branch-name
+
+backout changes from your branch
+
+	$ git checkout master
+	$ git branch -D my-new-branch-name
+
+remove deleted files from your repository
+
+	$ git rm $(git ls-files --deleted) 

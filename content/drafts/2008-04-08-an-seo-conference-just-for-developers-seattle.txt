@@ -1,0 +1,35 @@
+---
+title: An SEO Conference Just for Developers (Seattle)
+---
+
+Did you know that search engines drive nearly 30% of all page views to web sites? And that's just an average, the number can be much higher for smaller sites, and ecommerce sites. That's a lot of customers, possibly even more than the number of firefox users coming to your site. That begs the question – do you spend as much time testing your site for search as you do for FireFox?
+
+Over the past year I've done several talks for web developers on SEO, covering how search engines work and some best practices, and I have been really surprised how low the awareness has been. Everyone seems interested, but there tend to be a lot of misconceptions about SEO (e.g. "I want to build my site for people not robots", or "SEO? No, I'm not a spammer"). Well, to help put those misconceptions aside, I've been working with <a href="http://www.ninebyblue.com/about/">Vanessa Fox</a> at the SMX conference series to create a 1-day event on <a href="http://searchmarketingexpo.com/advanced/2008/developer-day.php">SEO for web developers</a>. Here's the agenda:
+
+**Search Friendly Development**
+
+Highlights the most important elements to consider for search engine optimization (SEO) when building a web application infrastructure and provides tactical details about how to implement those elements. Topics include:
+
+* Developing a crawlable infrastructure
+* Considerations when developing rich internet applications (using technologies such as Flash, Silverlight, and AJAX)
+* URL rewriting, redirection, canonicalization, and visitor tracking
+
+**Platform Considerations for the Microsoft Stack and LAMP Stack**
+
+Practical tips, tricks, and workarounds for search-friendly architecture.
+
+* Microsoft Stack (IIS, ASP.Net, Silverlight)
+* LAMP Stack (Apache, PHP, Ruby, Flash/Flex)
+* CMS Platforms (e.g. BlogEngine.net, AxCMS, WordPress, Movable Type, Drupal, Joomla)
+
+**Diagnosing Web Site Architecture Issues**
+
+Provides a checklist and workflow for diagnosing your web sites for SEO obstacles using freely available diagnostic tools.
+
+**Expert Technical Review of Your Website**
+
+This session will bring together experts who will use all of the information and tactics learned throughout the day and apply them to detailed site reviews of the code and infrastructure of sites submitted in advance by the audience.
+
+Sign up here if you're interested in <a href="http://searchmarketingexpo.com/speaker-form.php">becoming a speaker</a> at this event! Otherwise, if you're located in Seattle, you can <a href="http://searchmarketingexpo.com/advanced/2008/register.php">register here</a>.
+
+We'll also be doing several free events leading up to this, stay tuned for more information on one of those as well. 

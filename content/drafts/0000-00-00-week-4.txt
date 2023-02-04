@@ -1,0 +1,24 @@
+
+Project Update
+- Much Finer
+	- Blog
+		- Background
+		- Market Analysis
+	- Sign-up page
+	- Facebook ROI update
+	
+Cool technology things I've learned
+
+- Article on Rails (TDD, DSL, Inturpretted)
+	- store your PM docs and Test docs all in the same repository
+	- Resources: 
+		- Ruby Tutorial
+		- http://zombierails tutorial
+		- https://github.com/RailsApps/
+
+Technology Choices:
+
+Heroku
+CloudFoundry
+EngineYard
+OpenShift

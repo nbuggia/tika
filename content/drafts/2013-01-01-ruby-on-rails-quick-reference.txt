@@ -1,0 +1,115 @@
+---
+title: Ruby on Rails (RoR) Quick Reference
+---
+
+Links: <a href="http://guides.rubyonrails.org/">Rails Guides</a>, <a href="http://api.rubyonrails.org/">Rails API</a>, <a href="http://www.ruby-doc.org/core/">Ruby Core</a>, <a href="http://www.ruby-doc.org/stdlib/">Ruby Stdlib</a>
+
+play with your app interactively
+
+	$ rails console
+	$ rails db
+
+generate different types of resources
+
+	$ rails generate scaffold User name:string email:string
+	$ rails generate scaffold Micropost content:string user_id:integer
+
+delete resources
+
+	$ rails destroy controller FooBar
+	$ rails destroy model FooBar
+
+database migrations
+
+	$ rake db:migrate
+	$ rake db:rollback
+	$ rake db:rollback VERSION=0
+
+show full list of databases
+
+	$ rake -T db
+
+show all rake tasks
+
+	$ rake -T
+
+show all routes available
+
+	$ rake routes
+
+update the secret token for your app (useful if you just cloned one from github)
+
+	$ rake secret
+
+### RSpec with Rails
+
+	$ rails generate rspec:install
+	
+Generate e2e test with capybara for the controller Users
+
+	$ rails generate integration_test user_pages
+
+TODO: Investigate better test automation with guard and spork (described at the end of chapter 3), sublime text 2 ruby tests inside subl
+
+## Bundler
+
+	$ bundle update
+
+Note, <code>--without</code> is sticky, future bundle installs will not include
+production
+
+	$ bundle install --without production
+
+Runs a command within the environment specified by your Gemfile
+
+	$ bundle exec foobar
+
+
+play with your app interactively
+
+	$ rails console
+
+generate different types of resources
+
+	$ rails generate scaffold User name:string email:string
+	$ rails generate scaffold Micropost content:string user_id:integer
+
+delete resources
+
+	$ rails destroy controller FooBar
+	$ rails destroy model FooBar
+
+database migrations
+
+	$ rake db:migrate
+	$ rake db:rollback
+	$ rake db:rollback VERSION=0
+
+show full list of databases
+
+	$ rake -T db
+
+show all rake tasks
+
+	$ rake -T
+
+update the secret token for your app (useful if you just cloned one from github)
+
+	$ rake secret
+
+## RSpec with Rails
+
+	$ rails generate rspec:install
+
+Investigate better test automation with guard and spork (described at the end of chapter 3), sublime text 2 ruby tests inside subl
+
+## Bundler
+
+Update the dependencies within your app. Note <code>--without</code> is sticky so future <code>bundle install</code> will not include production.
+
+	$ bundle update
+	$ bundle install --without production
+
+Runs a command within the environment specified by your Gemfile
+
+	$ bundle exec foobar

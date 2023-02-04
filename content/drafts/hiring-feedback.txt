@@ -1,0 +1,27 @@
+
+
+
+
+
+1. The article felt relatively long. There's plenty of material for 2-3 articles. May be consider breaking it up?
+
+2. Great place to work: You state the problems well here, but I didn't see as much material on tips or solutions. E.g. making sure you can clearly state the goal and scope of your team when asked. Where do you want it to be in 12 months?
+
+3. Career: Yeah, it's always important to hire for growth, not just for the current "job" to be filled. I've never seen a particular "job/project" last more than 6-12 months.
+
+4. Diversity: Might be also important to consider balance / fit with the existing team.
+
+5. Network: Likewise, people who reach out to you for networking are usually go-getters, and are worth keeping in touch with.
+
+6. Qualifying: I'm amazed by how many candidates don't get past a simple email screen, for devs, simple programming questions. I try to use these as much as I can.
+
+7. Selling: It's important to understand what's important to the particular candidate. It can vary a lot. E.g. some folks need stability. Other's need the opposite.
+
+I've been thinking about compiling something like this myself, and also about the other way around: Interviewing teams before you join.
+
+
+
+Spending time to understand what position you're hiring for is very important, doesn't have to be the position that was vacated - hiring for a job in a large company vs. for a startup or a job in flux is very different.. Knowing what need you have in mind is I think the first step.. Also I think every time you hire as a manager you can pick what your need is and what the team needs.. In terms of experience, culture and temperament..
+
+Ditto with Chen on length.. I would break the article into either hiring for a team in a company with culture and job function already set or for your startup.. I think you assume hiring is for managers in a company.. In which case you can set that tone early up.. Right now its titled hiring talent but reads like hiring for a company..
+

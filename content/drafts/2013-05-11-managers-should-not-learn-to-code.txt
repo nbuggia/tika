@@ -1,0 +1,17 @@
+---
+title: "Managers Shouldn't Learn to Code"
+---
+
+_"Learning a little bit of programming is probably worse than not learning it at all if you are going to be working with professional programmers. ...they will refer back to it as if their mastery of a FOR…NEXT loop qualifies them to make decisions about programming projects."_
+<p style="text-align:right; font-style:italics;">
+<a href="http://typicalprogrammer.com/?p=175">Sorry, Digital Ad Exec, I Probably Don’t Want To Work For You</a>
+</p>
+
+
+I don't agree with this.
+
+The problem isn't whether or not they have any experience programming, the problem seems to be more about their level of self-awareness and maturity as a manager. The same issue could exist if they know a little about accounting, or marketing or sales. 
+
+Good managers should hire and empower experts on their team - bad managers don't have these skills, so they can try to micromanage.
+
+As for whether or not everyone should know programming? I can't say. But if your organization's primary business is developing software, or working with technology, I think the manager should seek to understand it as deeply as they can - even if that means taking a few courses on computer programming. It will give them perspective on what the team does, why bugs happen, why cost estimates can be so vauge. Better yet - it gives them insight into the passion that good developers have and how they think, and that can bring huge benefits to the organization.

@@ -1,0 +1,14 @@
+---
+title: Where's Nathan?
+---
+
+It has been quite a while since I’ve last updated this blog. It doesn’t mean that I have stopped writing, just that I’ve been writing other places. For SEO, I will mostly continue to post articles on the <a href="http://blogs.msdn.com/webmaster">Bing Search Webmaster blog</a>, for developer related content (and <a href="http://en.oreilly.com/found">O’Reilly Found conference</a> information) will continue to post on <a href="http://janeandrobot.com/">Jane and Robot</a>, and finally for financial insight I’ll be writing on <a href="http://meridianpacific.org/">Meridian Pacific Investments blog</a>.
+
+I’ve been really busy lately with Microsoft and the O’Reilly conference, but I still have a few additional side projects that I’ll be introducing in the next couple months. Stay tuned. Here’s a few of the articles I’ve published recently:
+
+* <a href="http://janeandrobot.com/post/URL-Referrer-Tracking.aspx">URL Referrer Tracking</a> – overview of the various implementations available for tracking where your traffic is coming from in a search-friendly way.
+* <a href="http://www.bing.com/blogs/Site_Blogs/b/webmaster/archive/2008/10/20/smx-east-2008-ajax-css-and-web-2-0.aspx">SMX East: AJAX, CSS and Web 2.0</a> – a strategic look at implementation options for building search-friendly Web 2.0 applications.
+* <a href="http://www.bing.com/blogs/Site_Blogs/b/webmaster/archive/2008/10/15/smx-east-2008-unraveling-urls-and-demystifying-domains.aspx">SMX East: Unraveling URLs and Demystifying Domains</a> – top 7 issues we at Live Search see with URLs and how to avoid them
+* <a href="http://www.bing.com/blogs/Site_Blogs/b/webmaster/archive/2008/10/13/smx-east-2008-webmaster-guidelines.aspx">SMX East: Webmaster Guidelines</a> – overview of the search engine guidelines for indexing and background information on why they exist.
+
+I will continue to update this blog as time permits, but I don’t write very much that isn’t finance or SEO related these days. Hopefully as I dig deeper into some of my other projects I’ll have something useful to write

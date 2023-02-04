@@ -1,0 +1,37 @@
+---
+title: Thoughts on Ruby from a Nubie
+---
+
+One of my primary sabbatical goals was to ramp up on some of the big non-Microsoft technologies in web development. I evalued a handfull of options (Node.js, Python, etc) but ended up settling on Ruby because of the maturity of the technology and depth of community. 
+ 
+With Ruby, you are not just learning a new language, you're also learning a set of frameworks, and development practices. These all come together as the basis for the web development culture. (My Microsoft friends might say the _non-microsoft_ web development culture.)
+
+## Inturpretted Languages
+
+execute code on the fly, easy to build plugins, dangerous for production (but everything is dangerous). Roots in PHP, Perl.
+
+## Domain Specific Languages
+
+## Frameworks a-Plenty
+
+
+## Charting Your Own Learning Plan
+
+1. First spend some time with Ruby the language
+	- interactive ruby course
+	- ruby koens challenge http://koans.heroku.com/
+	- Books?
+
+2. Git, Git
+
+2. Do a simple project in a simple framework (Rack or Sinatra)
+	- Write your own blog engine
+		- baron, toto, that other one
+
+4. Heroku, heroku
+	
+		
+3. Play with Rails
+	- Rails Tutorial: http://ruby.railstutorial.org/
+	- railscasts
+	

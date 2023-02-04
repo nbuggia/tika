@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+	<title><%= @config[:title].encode(:xml => :text) %></title>
+    <link rel="self" href="<%= @config.get_feed_permalink %>" />
+	<updated><%= @articles.first.date_iso8601 %></updated>
+	<id><%= @config.get_feed_permalink %></id>
+
+	<% for @article in @articles %>
+		<entry>
+			<title type="html">
+        <%= @article.title.encode(:xml => :text) %>
+      </title>
+			<link href="<%= @article.permalink %>" />
+			<category term="<%= @article.category %>" />
+			<author>
+				<name type="html"><%= @article.author.encode(:xml => :text) %></name>
+			</author>
+			<id><%= @article.permalink %></id>
+			<updated><%= @article.date_iso8601 %></updated>
+			<summary type="html">
+        <%= @article.summary.encode(:xml => :text) %>
+      </summary>
+
+			<% if @config[:feed_show_full_article] %>
+			<content type="html"><%= @article.body.encode(:xml => :text) %></content>
+			<% end %>
+		</entry>
+	<% end %>
+</feed>

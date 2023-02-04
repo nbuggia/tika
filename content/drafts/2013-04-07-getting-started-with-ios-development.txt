@@ -1,0 +1,41 @@
+---
+title: Getting Started with iOS Development
+---
+
+A couple friends of mine have just started getting into iOS programming, so I have pulled together a set of resources to help get them started. 
+
+## If You're New to Mac OS X...
+
+The only way to build either an iPhone or iPad app today is to use a Mac. (Okay, that's not entirely true, there are a few other options, but if you're just getting started, you're definitely going to want a Mac, because that has the most robust environment, and enjoys the best support and community.)
+
+So, if you're new to the Mac OS, here's a couple things that you'll want to know:
+
+* You are totally going to miss the Flag + Arrow key command from Windows 7 to automagically organize your windows, install <a href="https://itunes.apple.com/us/app/bettersnaptool/id417375580?mt=12">BetterSnapTool</a> to get an even better version of that.
+* Research <a href="http://www.youtube.com/watch?v=RZ_uR9Cih88"> mission control</a> to figure out how to use multiple desktops. You can have a desktop with just your coding stuff all setup so you don't get distracted or need to reconfigure it every time you come back to it.
+* Running Windows - I would recommend trying <a href="https://virtualbox.org">Virtual Box</a> it is almost as good as Parallel, but it is free!
+* Ejecting a DVD is obnoxiously complicated, drag it to the trash can
+
+## Getting Started with iOS Development
+
+* <a href="https://itunes.apple.com/us/app/xcode/id497799835?mt=12">Install Xcode</a> from the App Store app. It is free to code apps on your desktop, but as soon as you want to publish them to the AppStore you need to pay Apple's $99 annual licensing fee. It covers the cost of all the great content they produce.
+* <a href="https://developer.apple.com/devcenter/ios/index.action">Apple iOS Development Center</a> - This is where Apple publishes all their content. For every library and technology, there is a PDF overview, code samples and generally a video presentation by one of their engineers. Super high quality and up to date.
+	* <a href="https://developer.apple.com/videos/">WWDC Videos</a> - videos on every technology and library.
+* Stanford iOS Development Class - this is often the best place to get started. They do a really good job with this course, and it gives you a good learning plan, including a syllabus and homework!
+	* <a href="https://itunes.apple.com/us/itunes-u/ipad-iphone-application-development/id473757255?mt=10">Fall 2011</a>
+	* <a href="https://itunes.apple.com/us/itunes-u/developing-apps-for-ios-hd/id395605774?mt=10">Fall 2010</a>
+* Github and StackOverflow will be your best friends. Anything you need will be covered there in detail. Use your favorite search engine and don't be afraid to post questions.
+	* <a href="https://github.com/ericjohnson/canabalt-ios">Canablt source code</a>
+	* <a href="http://projectswithlove.com/projects/index.html">Projects with love</a>
+	* Almost ever development book stores their example source code here, generally more useful than the book :)
+* Books - there are a couple really good ones on amazon, I found them helpful because they gave me a learning plan. (<a href="http://www.techrepublic.com/blog/ios-app-builder/five-books-that-every-apple-ios-developer-should-own/153">http://www.techrepublic.com/blog/ios-app-builder/five-books-that-every-apple-ios-developer-should-own/153</a>)
+* <a href="http://www.glyphish.com/">Glyphish</a> - standard icon library for many iOS apps. Look professional cheaply!
+* <a href="https://itunes.apple.com/us/app/keynote/id409183694?mt=12">Keynote</a> (Apple's PowerPoint) is an awesome mockup environment for iOS apps. You can build them with the attached toolkits and test the interaction model by hyperlinking the buttons, saving them to PDF and running them in Goodreader on your iOS device of choice. Great way to do usability.
+	* <a href="http://keynotopia.com/">Keynoteopia</a> - iOS prototype kit
+* <a href="http://www.pixelmator.com/">Pixelmator</a> is a cheap Photoshop version available from the App Store. Pretty much the de-facto standard image editing tool for iOS developers.
+* <a href="http://99designs.com/">99Designs.com</a> - $120 for professional art for your app, cheap and easy. I'm happy to share examples from my apps there.
+
+## FAQ
+
+**Should I learn Objective-C, or use some HTML framework?**
+
+While there is a time and a place for the HTML-based frameworks, it will likely just make your first app more complicated by creating a server dependency for a project you might not be that committed to at this point. Learn Objective-C and relish in the Mac development culture!

@@ -1,0 +1,27 @@
+---
+title: "iOS on the Desktop"
+---
+
+Almost everyone I know over the age of 50, uses an iPad as their primary computer now. It is actually a pretty amazing thing to see, many of them struggled to use a PC, and now happily swipe through photos, tap through the internet and FaceTime like a pro.
+
+At least that's how it started, I've also noticed that a lot of senior managers have started coming to meetings with just their iPads. They're not really the type to take notes, and mostly other people are presenting _to_ them, so they don't need to project. 10 hrs of battery life, great email and calendar apps, and now a great selection of tiny keyboards. I'm not sure why anyone still carries a laptop. _(Oh, right - coding and spreadsheets)_
+
+I myself have tried the iPad only challenge while traveling in Europe this past August, and I actually really, really liked it. The simplicity of one single app at a time is an amazing thing, and I think it makes me more productive in most cases. I really _want_ to switch to an iPad as my primary computer, but there are still too many times when I have a task that is just too complicated for such a small screen.
+
+This is why I want Apple to include a _Desktop Mode_in the next verison of iOS. Now that we have a 64-bit processor, 128 GB hard drives, I don't see why we can't also get a slightly better graphics card and a little big screen love.
+
+## Connecting to External Display
+
+## Setting up the Desktop
+
+<img src="/images/articles/ios-desktop.png" />
+<img src="/images/articles/ios-desktop.png" />
+<img src="/images/articles/ios-desktop.png" />
+
+## User Input
+
+## Full Screen
+
+## The iPhone
+
+## Briefing Room
