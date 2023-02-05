@@ -117,4 +117,3 @@ shutil.copytree("./themes/default/css/", "./build/theme/css")
 shutil.copytree("./themes/default/img/", "./build/theme/img")
 shutil.copytree("./themes/default/js/", "./build/theme/js")
 print(' -> ./build/theme/')
-
