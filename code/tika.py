@@ -1,8 +1,33 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 import os
 import frontmatter
 import markdown
 import shutil
+
+###
+# Configuration
+###
+
+TITLE = 'nathan buggia'
+AUTHOR = 'nathan'
+DATE = 'lambda {|now| now.strftime("#{now.day} %b %Y") }'
+URL = 'http://www.nathanbuggia.com/'
+THEME = 'typography'
+
+PERMALINK_DATE_FORMAT = "NO_DATE"
+
+HEADER_IMAGE = "/images/instagram.png"
+HEADER_IMAGE_SMALL = '/images/instagram-small.png'
+
+ARTICLE_MAX = 10
+PERMALINK_PREFIX = 'posts'
+FEED_SHOW_FULL_ARTICLE = 'true' 
+
+###
+# Script
+###
 
 # make sure the output folder is created
 if not os.path.exists ('build'):
@@ -117,3 +142,12 @@ shutil.copytree("./themes/default/css/", "./build/theme/css")
 shutil.copytree("./themes/default/img/", "./build/theme/img")
 shutil.copytree("./themes/default/js/", "./build/theme/js")
 print(' -> ./build/theme/')
+
+
+def main(): 
+	"""Launcher.""" 
+	# init the GUI or anything else 
+	pass 
+ 
+if __name__ == "__main__": 
+	main() 
