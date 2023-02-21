@@ -28,15 +28,13 @@ FEED_SHOW_FULL_ARTICLE = 'true'
 POSTS_DIRECTORY = './content/posts'
 
 ###
-# Main()
+# processPosts()
 ###
 
-def main(): 
-	# make sure the output folder is created
-    if not os.path.exists ('build'):
-        os.mkdir('build')
-
+def processPosts():
     print('** POSTS **')
+
+    posts = {}
 
     # loop through all the MD files in the content directory
     for dirpath, dirs, files in os.walk(POSTS_DIRECTORY):
@@ -83,6 +81,20 @@ def main():
                                 </body>
                             </html>
                         ''')
+
+
+
+
+###
+# Main()
+###
+
+def main(): 
+	# make sure the output folder is created
+    if not os.path.exists ('build'):
+        os.mkdir('build')
+
+    processPosts()
 
     print('** CUSTOM PAGES **')
 

@@ -16,14 +16,21 @@ https://www.sumukhbarve.com/build-python-template-engine
 
 ## Python environment
 
-pip3 install -r requirements.txt 
+Install dependent modules
 
-python3 -m pip install --upgrade pip
+    pip3 install -r requirements.txt 
+    python3 -m pip install --upgrade pip
 
-./tika.py
+To run the app:
+
+    ./tika.py
 
 
+## GitHub configuration
 
+Set git email to the GitHub privacy account: 594357+nbuggia@users.noreply.github.com
+
+Provision a developer access token, use that as your password
 
 
 
