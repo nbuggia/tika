@@ -22,32 +22,29 @@ HEADER_IMAGE = "/images/instagram.png"
 HEADER_IMAGE_SMALL = '/images/instagram-small.png'
 
 ARTICLE_MAX = 10
-PERMALINK_PREFIX = 'posts'
 FEED_SHOW_FULL_ARTICLE = 'true' 
 
-POSTS_DIRECTORY = './content/posts'
+DIR_ARTICLES = './content/articles'
 
 ###
-# Post()
+# Article()
 ###
 
-class Post():
+class Article():
     def __init__(self, slug, date, frontmatter):
         self.slug = slug
         self.date = date
         self.frontmatter = frontmatter
 
 ###
-# processPosts()
+# processArticles()
 ###
 
-def processPosts():
-    print('** POSTS **')
-
-    posts = []
+def processArticles():
+    articles = []
 
     # loop through all the MD files in the content directory
-    for dirpath, dirs, files in os.walk(POSTS_DIRECTORY):
+    for dirpath, dirs, files in os.walk(DIR_ARTICLES):
         for file in files:
             file_name_path = os.path.join(dirpath, file)
             if file_name_path.endswith('.md'):
@@ -67,8 +64,8 @@ def processPosts():
                         + '.html'
                     #print(' ---> ', destination_path)
 
-                    # add the post to our list of posts
-                    posts.append(Post(file_name_path, "date", front_matter))
+                    # add the post to our list of articles
+                    articles.append(Article(file_name_path, "date", front_matter))
 
                     # creates the directories if they do not already exist
                     os.makedirs(os.path.dirname(destination_path), exist_ok=True)
@@ -95,9 +92,8 @@ def processPosts():
                             </html>
                         ''')
 
-    print("Posts::::::", posts[0].slug)
-    print("Posts::::::", posts[0].frontmatter)
-
+    print("Posts::::::", articles[0].slug)
+    print("Posts::::::", articles[0].frontmatter)
 
 
 ###
@@ -109,7 +105,7 @@ def main():
     if not os.path.exists ('build'):
         os.mkdir('build')
 
-    processPosts()
+    processArticles()
 
     print('** CUSTOM PAGES **')
 
