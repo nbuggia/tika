@@ -28,13 +28,23 @@ FEED_SHOW_FULL_ARTICLE = 'true'
 POSTS_DIRECTORY = './content/posts'
 
 ###
+# Post()
+###
+
+class Post():
+    def __init__(self, slug, date, frontmatter):
+        self.slug = slug
+        self.date = date
+        self.frontmatter = frontmatter
+
+###
 # processPosts()
 ###
 
 def processPosts():
     print('** POSTS **')
 
-    posts = {}
+    posts = []
 
     # loop through all the MD files in the content directory
     for dirpath, dirs, files in os.walk(POSTS_DIRECTORY):
@@ -46,7 +56,7 @@ def processPosts():
                     # front matter is the YAML attributes prepended to the MD file
                     front_matter, content_md = frontmatter.parse(raw)
                     content_html = markdown.markdown(content_md)
-                    print(' -> ', front_matter.keys())
+                    #print(' -> ', front_matter.keys())
 
                     # splits the directory path into pieces and keeps all but the first one
                     destination_path = './build' \
@@ -55,7 +65,10 @@ def processPosts():
                         + os.path.sep \
                         + os.path.splitext(file)[0] \
                         + '.html'
-                    print(' ---> ', destination_path)
+                    #print(' ---> ', destination_path)
+
+                    # add the post to our list of posts
+                    posts.append(Post(file_name_path, "date", front_matter))
 
                     # creates the directories if they do not already exist
                     os.makedirs(os.path.dirname(destination_path), exist_ok=True)
@@ -82,6 +95,8 @@ def processPosts():
                             </html>
                         ''')
 
+    print("Posts::::::", posts[0].slug)
+    print("Posts::::::", posts[0].frontmatter)
 
 
 
