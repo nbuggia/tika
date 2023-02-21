@@ -25,6 +25,8 @@ ARTICLE_MAX = 10
 PERMALINK_PREFIX = 'posts'
 FEED_SHOW_FULL_ARTICLE = 'true' 
 
+POSTS_DIRECTORY = './content/posts'
+
 ###
 # Script
 ###
@@ -36,7 +38,7 @@ if not os.path.exists ('build'):
 print('** POSTS **')
 
 # loop through all the MD files in the content directory
-for dirpath, dirs, files in os.walk("./content/posts"):
+for dirpath, dirs, files in os.walk(POSTS_DIRECTORY):
     for file in files:
         file_name_path = os.path.join(dirpath, file)
         if file_name_path.endswith('.md'):
@@ -146,7 +148,6 @@ print(' -> ./build/theme/')
 
 def main(): 
 	"""Launcher.""" 
-	# init the GUI or anything else 
 	pass 
  
 if __name__ == "__main__": 
