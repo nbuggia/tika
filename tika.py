@@ -64,21 +64,22 @@ class TikaEngine():
     def __init__(self):
         pass
 
-    def __createDestinationPath(self, type, dirpath, file, file_stream):
+    def __createDestinationPath(self, type, dirpath, file):
         """ Computes the path for the asset in the build directory """
-        sep = file_stream.path.sep
+        sep = os.path.sep
 
         if "articles" == type:
-            path = file_stream.path.join(*(dirpath.split(sep)[2:]))
-            file_without_ext = file_stream.path.splitext(file)[0]
+            path = os.path.join(*(dirpath.split(sep)[2:]))
+            file_without_ext = os.path.splitext(file)[0]
             return './build' + sep + path + sep + file_without_ext + '.html'
-        elif "custom_page" == type:
+        elif "custom" == type:
             return './build' + sep + file
 
 
     def __parseDate(self, slug):
         """ Extracts the date from the slug """
-        # TODO - this should implement from SLUG or FRONTMATTER, move into the Articles Object
+        # TODO - this should implement from SLUG or FRONTMATTER, move into the 
+        # Articles Object
 
         dateString = slug[0:10].strip()
         return datetime.datetime.strptime(dateString, '%Y-%m-%d')
@@ -94,18 +95,13 @@ class TikaEngine():
                 if file_name_path.endswith('.md'):
                     with open(file_name_path) as file_stream:
                         raw = file_stream.read()
-                        # front matter is the YAML attributes prepended to the markdown file
                         front_matter, content_md = frontmatter.parse(raw)
                         content_html = markdown.markdown(content_md)
-                        #print(' -> ', front_matter.keys())
-
                         slug = os.path.splitext(file)[0]
-                        temp = self.__parseDate(slug)
-
-                        destination_path = self.__createDestinationPath("articles", dirpath, file, os)
+                        destination_path = self.__createDestinationPath("articles", dirpath, file)
 
                         # add the post to our list of articles
-                        articles.append(Article(slug, "date", front_matter, content_html))
+                        articles.append(Article(slug, self.__parseDate(slug), front_matter, content_html))
 
                         # creates the directories if they do not already exist
                         os.makedirs(os.path.dirname(destination_path), exist_ok=True)
@@ -136,8 +132,6 @@ class TikaEngine():
 
 
     def __processCustomPages(self):
-        print('** CUSTOM PAGES **')
-
         # loop through all the custom pages
         for dirpath, dirs, files in os.walk("./content/pages"): 
             for file in files:
@@ -145,9 +139,8 @@ class TikaEngine():
                 if file_name_path.endswith('.html'):
                     with open(file_name_path) as file_stream:
                         raw = file_stream.read()
-                        #print(' -) ', file_name_path)
                         page_title = os.path.splitext(file)[0].title()
-                        destination_path = self.__createDestinationPath("custom_page", dirpath, file, os)
+                        destination_path = self.__createDestinationPath("custom", dirpath, file)
 
                         # writes out the rendered custom page to the build directory
                         with open(destination_path, 'w') as file:
@@ -170,28 +163,18 @@ class TikaEngine():
                                 </html>
                             ''')
 
-
-    def run(self):
-        # make sure the output folder is created
-        if not os.path.exists ('build'):
-            os.mkdir('build')
-
-        articles = self.__processArticles()
-        self.__processCustomPages()
-
-        print('** ASSETS **')
-                            
+    def __processAssets(self):
         # copy image assests
         if os.path.exists("./build/images"):
             shutil.rmtree("./build/images")
         shutil.copytree("./content/images/", "./build/images")
-        print(' -> ./build/images/')
+        #print(' -> ./build/images/')
 
         # copy download assets
         if os.path.exists("./build/downloads"):
             shutil.rmtree("./build/downloads")
         shutil.copytree("./content/downloads/", "./build/downloads")
-        print(' -> ./build/downloads/')
+        #print(' -> ./build/downloads/')
 
         # copy theme - everything except the rendering template
         if os.path.exists("./build/theme"):
@@ -200,7 +183,17 @@ class TikaEngine():
         shutil.copytree("./themes/default/css/", "./build/theme/css")
         shutil.copytree("./themes/default/img/", "./build/theme/img")
         shutil.copytree("./themes/default/js/", "./build/theme/js")
-        print(' -> ./build/theme/')
+        #print(' -> ./build/theme/')
+
+
+    def run(self):
+        # make sure the output folder is created
+        if not os.path.exists ('build'):
+            os.mkdir('build')
+
+        articles = self.__processArticles()
+        self.__processCustomPages()
+        self.__processAssets()
 
 ###
 # main()
