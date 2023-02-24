@@ -37,9 +37,8 @@ ARTICLE_MAX = 10
 FEED_SHOW_FULL_ARTICLE = 'true' 
 
 # Where should we extract the date from? SLUG or FRONT_MATTER
+# FrontMatter only
 DATE_SOURCE = "SLUG"
-
-DIR_ARTICLES = './content/articles'
 
 ###
 # Renderer()
@@ -52,16 +51,24 @@ class Renderer():
         pass
 
     def loadTemplates(self, templates_path):
+        """ Loads Jinja rendering templates from the theme directory """
         environment = jinja2.Environment(loader=jinja2.FileSystemLoader(templates_path))
         self.base_template = environment.get_template("base.html")
         self.article_template = environment.get_template("article.html")
 
     def renderArticles(self, articles):
-        """ Render an html page for each article in the build directory """
+        """ Render an html page in the build directory for each article """
         for article in articles:
             with open(article['destination_path'], mode="w", encoding="utf-8") as out_file:
                 os.makedirs(os.path.dirname(article['destination_path']), exist_ok=True)
                 out_file.write(self.article_template.render(article))
+    
+    def renderCustomPages(self, pages):
+        """ Render an html page in the build directory for each custom page """
+        for page in pages:
+            with open(page['destination_path'], mode="w", encoding="utf-8") as out_file:
+                os.makedirs(os.path.dirname(page['destination_path']), exist_ok=True)
+                out_file.write(self.article_template.render(page))
 
 ###
 # TikaEngine()
@@ -90,60 +97,43 @@ class TikaEngine():
 
 
     def __processArticles(self):
-        """ Loads all markdown files in the articles director into array """
+        """ Loads all markdown files from ./content/articles into array """
         articles = []
-        for dirpath, dirs, files in os.walk(DIR_ARTICLES):
+        for dirpath, dirs, files in os.walk('./content/articles'):
             for file in files:
                 file_name_path = os.path.join(dirpath, file)
                 if file_name_path.endswith('.md'):
+                    article = {}                        
+                    article['slug'] = os.path.splitext(file)[0]
+                    article['destination_path'] = self.__createDestinationPath("articles", dirpath, file)
+                    article['date'] = self.__parseDate(article['slug'])
                     with open(file_name_path) as file_stream:
                         raw = file_stream.read()
                         front_matter, content_md = frontmatter.parse(raw)
-                        article = {}                        
                         article['content_html'] = markdown.markdown(content_md)
-                        article['slug'] = os.path.splitext(file)[0]
-                        article['destination_path'] = self.__createDestinationPath("articles", dirpath, file)
-                        article['date'] = self.__parseDate(article['slug'])
                         # front matter attributes are also added so they are accessible in the template
                         article.update(front_matter)
-                        # convert all keys to lowercase for consistency
-                        article = {k.lower(): v for k, v in article.items()}
-                        articles.append(article)
-
+                    # convert all keys to lowercase for consistency
+                    article = {k.lower(): v for k, v in article.items()}
+                    articles.append(article)
         return articles
 
 
     def __processCustomPages(self):
-        # loop through all the custom pages
+        """ Loads all custom pages from ./content/pages directory into array """
+        pages = []
         for dirpath, dirs, files in os.walk("./content/pages"): 
             for file in files:
                 file_name_path = os.path.join(dirpath, file)
                 if file_name_path.endswith('.html'):
-                    with open(file_name_path) as file_stream:
-                        raw = file_stream.read()
-                        page_title = os.path.splitext(file)[0].title()
-                        destination_path = self.__createDestinationPath("custom", dirpath, file)
+                    page = {}
+                    page['title'] = os.path.splitext(file)[0].title()
+                    page['destination_path'] = self.__createDestinationPath("custom", dirpath, file)
+                    with open(file_name_path) as file_stream: 
+                        page['content_html'] = file_stream.read()
+                    pages.append(page)
+        return pages
 
-                        # writes out the rendered custom page to the build directory
-                        with open(destination_path, 'w') as file:
-                            file.write(r'''
-                                <!DOCTYPE html>
-                                <html lang="en">
-                                    <head>
-                                        <meta charset="utf-8"/>
-                                        <title>
-                            ''')
-                            file.write(page_title)
-                            file.write(r'''
-                                        </title>
-                                    </head>
-                                    <body>
-                            ''')
-                            file.write(raw)
-                            file.write(r'''
-                                    </body>
-                                </html>
-                            ''')
 
     def __processAssets(self):
         # copy image assests
@@ -179,7 +169,8 @@ class TikaEngine():
         articles = self.__processArticles()
         renderer.renderArticles(articles)
 
-        self.__processCustomPages()
+        posts = self.__processCustomPages()
+        renderer.renderCustomPages(posts)
 
         self.__processAssets()
 
