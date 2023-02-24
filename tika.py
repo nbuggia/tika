@@ -12,10 +12,11 @@ $ ./tika.py
 """
 
 import os
-import frontmatter
-import markdown
 import shutil
 import datetime
+import frontmatter
+import markdown
+from jinja2 import Environment, FileSystemLoader
 
 ###
 # Configuration
@@ -41,18 +42,26 @@ DATE_SOURCE = "SLUG"
 DIR_ARTICLES = './content/articles'
 
 ###
-# Article()
+# Renderer()
 ###
 
-class Article():
-    """ Data structure used to represent an article """
-    
-    def __init__(self, slug, date, frontmatter, article):
-        self.slug = slug
-        self.date = date
-        self.frontmatter = frontmatter
-        self.article = article        
+class Renderer():
+    """ Renders content into HTML based on your theme """
 
+    def __init__(self):
+        pass
+
+    def loadTemplates(self, templates_path):
+        environment = Environment(loader=FileSystemLoader(templates_path))
+        self.base_template = environment.get_template("base.html")
+        self.article_template = environment.get_template("article.html")
+
+    def renderArticles(self, articles):
+        """ Render an html page for each article in the build directory """
+        for article in articles:
+            with open(article['destination_path'], mode="w", encoding="utf-8") as out_file:
+                os.makedirs(os.path.dirname(article['destination_path']), exist_ok=True)
+                out_file.write(self.article_template.render(article))
 
 ###
 # TikaEngine()
@@ -65,9 +74,8 @@ class TikaEngine():
         pass
 
     def __createDestinationPath(self, type, dirpath, file):
-        """ Computes the path for the asset in the build directory """
+        """ Computes the build directory path for each content type """
         sep = os.path.sep
-
         if "articles" == type:
             path = os.path.join(*(dirpath.split(sep)[2:]))
             file_without_ext = os.path.splitext(file)[0]
@@ -75,20 +83,15 @@ class TikaEngine():
         elif "custom" == type:
             return './build' + sep + file
 
-
     def __parseDate(self, slug):
         """ Extracts the date from the slug """
-        # TODO - this should implement from SLUG or FRONTMATTER, move into the 
-        # Articles Object
-
         dateString = slug[0:10].strip()
         return datetime.datetime.strptime(dateString, '%Y-%m-%d')
 
 
     def __processArticles(self):
+        """ Loads all markdown files in the articles director into array """
         articles = []
-
-        # loop through all the markdown files in the content directory
         for dirpath, dirs, files in os.walk(DIR_ARTICLES):
             for file in files:
                 file_name_path = os.path.join(dirpath, file)
@@ -96,38 +99,17 @@ class TikaEngine():
                     with open(file_name_path) as file_stream:
                         raw = file_stream.read()
                         front_matter, content_md = frontmatter.parse(raw)
-                        content_html = markdown.markdown(content_md)
-                        slug = os.path.splitext(file)[0]
-                        destination_path = self.__createDestinationPath("articles", dirpath, file)
+                        article = {}                        
+                        article['content_html'] = markdown.markdown(content_md)
+                        article['slug'] = os.path.splitext(file)[0]
+                        article['destination_path'] = self.__createDestinationPath("articles", dirpath, file)
+                        article['date'] = self.__parseDate(article['slug'])
+                        # front matter attributes are also added so they are accessible in the template
+                        article.update(front_matter)
+                        # convert all keys to lowercase for consistency
+                        article = {k.lower(): v for k, v in article.items()}
+                        articles.append(article)
 
-                        # add the post to our list of articles
-                        articles.append(Article(slug, self.__parseDate(slug), front_matter, content_html))
-
-                        # creates the directories if they do not already exist
-                        os.makedirs(os.path.dirname(destination_path), exist_ok=True)
-
-                        # writes out the rendered HTML file to the build directory
-                        with open(destination_path, 'w') as file:
-                            file.write(r'''
-                                <!DOCTYPE html>
-                                <html lang="en">
-                                    <head>
-                                        <meta charset="utf-8"/>
-                                        <title>
-                            ''')
-                            if 'title' in front_matter.keys():
-                                file.write(front_matter['title'])
-                            file.write(r'''
-                                        </title>
-                                    </head>
-                                    <body>
-                            ''')
-                            file.write(content_html)
-                            file.write(r'''
-                                    </body>
-                                </html>
-                            ''')
-        
         return articles
 
 
@@ -187,12 +169,18 @@ class TikaEngine():
 
 
     def run(self):
+        renderer = Renderer()
+        renderer.loadTemplates("./themes/default/templates/")
+
         # make sure the output folder is created
         if not os.path.exists ('build'):
             os.mkdir('build')
 
         articles = self.__processArticles()
+        renderer.renderArticles(articles)
+
         self.__processCustomPages()
+
         self.__processAssets()
 
 ###

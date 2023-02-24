@@ -1,2 +1,6 @@
+# Python modules required by Tika
+# $ pip3 install -r requirements.txt 
+
 python-frontmatter
 markdown
+jinja2

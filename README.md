@@ -1,11 +1,11 @@
-# tika
-personal static cms generator in python
+# Tika
+A personal static site generator written in python
 
 
 
 TODO
-3. Create home page
-4. Create custom pages
+        # TODO - this should implement from SLUG or FRONTMATTER, move into the 
+        # Articles Object
 https://www.sumukhbarve.com/build-python-template-engine
 
 

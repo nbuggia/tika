@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>{{title}}</title>
+<meta name="description" content="{{summary}}">
+{% endblock head %}
+
+{% block content %}
+<header>
+	<h1>{{title}}</h1>
+</header>
+
+<article> 
+	<section class="post-details">
+		<time>{{date}}</time>
+	</section>
+	<section>{{content_html}}</section>
+</article>
+{% endblock content %}
