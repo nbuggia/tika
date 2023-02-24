@@ -16,7 +16,7 @@ import shutil
 import datetime
 import frontmatter
 import markdown
-from jinja2 import Environment, FileSystemLoader
+import jinja2
 
 ###
 # Configuration
@@ -52,7 +52,7 @@ class Renderer():
         pass
 
     def loadTemplates(self, templates_path):
-        environment = Environment(loader=FileSystemLoader(templates_path))
+        environment = jinja2.Environment(loader=jinja2.FileSystemLoader(templates_path))
         self.base_template = environment.get_template("base.html")
         self.article_template = environment.get_template("article.html")
 
