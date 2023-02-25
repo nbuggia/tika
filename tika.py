@@ -22,23 +22,16 @@ import jinja2
 # Configuration
 ###
 
-TITLE = 'nathan buggia'
+TITLE = 'Nathan Buggia'
 AUTHOR = 'nathan'
-DATE = 'lambda {|now| now.strftime("#{now.day} %b %Y") }'
-URL = 'http://www.nathanbuggia.com/'
-THEME = 'typography'
+URL = 'https://www.nathanbuggia.com/'
+THEME = 'default'
 
-PERMALINK_DATE_FORMAT = "NO_DATE"
+# used for pagination across the site
+MAX_ARTICLES_PER_PAGE = 10
 
-HEADER_IMAGE = "/images/instagram.png"
-HEADER_IMAGE_SMALL = '/images/instagram-small.png'
-
-ARTICLE_MAX = 10
+FEED_MAX_ARTICLES = 10
 FEED_SHOW_FULL_ARTICLE = 'true' 
-
-# Where should we extract the date from? SLUG or FRONT_MATTER
-# FrontMatter only
-DATE_SOURCE = "SLUG"
 
 ###
 # Renderer()
@@ -70,6 +63,20 @@ class Renderer():
                 os.makedirs(os.path.dirname(page['destination_path']), exist_ok=True)
                 out_file.write(self.article_template.render(page))
 
+    def renderIndexHtml(self, articles, pages):
+        """ Render a homepage to index.html in the build directory """
+        print('length: ', len(articles))
+
+
+    def renderCategoryPages(self, articles):
+        pass
+
+    def renderArchivePage(self, articles):
+        pass
+
+    def renderFeed(self, articles):
+        pass
+
 ###
 # TikaEngine()
 ###
@@ -95,7 +102,6 @@ class TikaEngine():
         dateString = slug[0:10].strip()
         return datetime.datetime.strptime(dateString, '%Y-%m-%d')
 
-
     def __processArticles(self):
         """ Loads all markdown files from ./content/articles into array """
         articles = []
@@ -116,8 +122,9 @@ class TikaEngine():
                     # convert all keys to lowercase for consistency
                     article = {k.lower(): v for k, v in article.items()}
                     articles.append(article)
+        # sort descending by date
+        articles.sort(key = lambda x:x['date'], reverse = True)
         return articles
-
 
     def __processCustomPages(self):
         """ Loads all custom pages from ./content/pages directory into array """
@@ -134,19 +141,15 @@ class TikaEngine():
                     pages.append(page)
         return pages
 
-
     def __processAssets(self):
-        # copy image assests
+        """ Move all static assets into the build directory """
         if os.path.exists("./build/images"):
             shutil.rmtree("./build/images")
         shutil.copytree("./content/images/", "./build/images")
-        #print(' -> ./build/images/')
 
-        # copy download assets
         if os.path.exists("./build/downloads"):
             shutil.rmtree("./build/downloads")
         shutil.copytree("./content/downloads/", "./build/downloads")
-        #print(' -> ./build/downloads/')
 
         # copy theme - everything except the rendering template
         if os.path.exists("./build/theme"):
@@ -155,24 +158,23 @@ class TikaEngine():
         shutil.copytree("./themes/default/css/", "./build/theme/css")
         shutil.copytree("./themes/default/img/", "./build/theme/img")
         shutil.copytree("./themes/default/js/", "./build/theme/js")
-        #print(' -> ./build/theme/')
-
 
     def run(self):
         renderer = Renderer()
         renderer.loadTemplates("./themes/default/templates/")
 
-        # make sure the output folder is created
         if not os.path.exists ('build'):
             os.mkdir('build')
 
         articles = self.__processArticles()
         renderer.renderArticles(articles)
 
-        posts = self.__processCustomPages()
-        renderer.renderCustomPages(posts)
+        pages = self.__processCustomPages()
+        renderer.renderCustomPages(pages)
 
         self.__processAssets()
+
+        renderer.renderIndexHtml(articles, pages)
 
 ###
 # main()
