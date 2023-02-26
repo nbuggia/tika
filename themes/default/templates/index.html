@@ -1,18 +1,3 @@
-<!-- Article List -->
-<section id="articles">
-	<ol>
-		<% for @article in @articles %>
-		<li>
-			<time><%= @article.date %></time>
-			<section class="title">
-				<a href="<%= @article.path %>"><%= @article.title %></a>
-				<span><%= @article.category %></span>
-			</section>
-		</li>
-		<% end %>
-	</ol>
-</section>
-
 {% extends "base.html" %}
 
 {% block head %}
@@ -21,31 +6,31 @@
 {% endblock head %}
 
 {% block content %}
-
-<article> 
-	<section class="post-details">
-		<time>{{date}}</time>
-	</section>
-	<section>{{content_html}}</section>
-</article>
-{% endblock content %}
-
-
-
-
-
-
+<section id="articles">
+	<ol>
+		{% for article in page_articles %}
+			<li>
+				<time>{{article.date}}</time>
+				<section class="title">
+					<a href="{{article.url}}">{{article.title}}</a>
+					<span>{{article.category}}</span>
+				</section>
+			</li>
+		{% endfor %}
+	</ol>
+</section>
 
 <!-- Pagination -->
 <div id="pagination">
 	<div class="left">
-		<% if @params[:page_forward] %>
-		<a href="<%= @params[:page_forward] %>">&larr; Previous articles</a>
-		<% end %>
+		{% if prev_link %}
+		<a href="{{prev_link}}">&larr; Previous articles</a>
+		{% endif %}
 	</div>
 	<div class="right">
-		<% if @params[:page_back] %>
-		<a href="<%= @params[:page_back] %>">Newer articles &rarr;</a>
-		<% end %>
+		{% if next_link %}
+		<a href="{{next_link}}">Newer articles &rarr;</a>
+		{% endif %}
 	</div>
 </div>
+{% endblock content %}

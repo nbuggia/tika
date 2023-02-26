@@ -48,6 +48,7 @@ class Renderer():
         environment = jinja2.Environment(loader=jinja2.FileSystemLoader(templates_path))
         self.base_template = environment.get_template("base.html")
         self.article_template = environment.get_template("article.html")
+        self.index_template = environment.get_template("index.html")
 
     def renderArticles(self, articles):
         """ Render an html page in the build directory for each article """
@@ -71,9 +72,14 @@ class Renderer():
             page_content['title'] = TITLE
             if i > 0: 
                 page_content['prev_link'] = "foobar"
+                page_filename = './build/index%s.html' % (i+1)
+            else:
+                page_filename = "./build/index.html"
             if i < len(articles_by_page)-1:
                 page_content['next_link'] = "foobar"
             page_content['page_articles'] = page_x
+            with open(page_filename, mode="w", encoding="utf-8") as out_file:
+                out_file.write(self.index_template.render(page_content))
 
     def renderCategoryPages(self, articles):
         pass
