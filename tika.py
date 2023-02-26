@@ -70,14 +70,16 @@ class Renderer():
         for i, page_x in enumerate(articles_by_page):
             page_content = {}
             page_content['title'] = TITLE
+            page_content['page_articles'] = page_x
             if i > 0: 
+                # only show prev link if we're not on the first page. 
                 page_content['prev_link'] = "foobar"
+                # compute the name each subsequent page
                 page_filename = './build/index%s.html' % (i+1)
             else:
                 page_filename = "./build/index.html"
             if i < len(articles_by_page)-1:
                 page_content['next_link'] = "foobar"
-            page_content['page_articles'] = page_x
             with open(page_filename, mode="w", encoding="utf-8") as out_file:
                 out_file.write(self.index_template.render(page_content))
 
