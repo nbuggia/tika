@@ -14,7 +14,6 @@ $ ./tika.py
 import os
 import shutil
 import datetime
-import math
 import frontmatter
 import markdown
 import jinja2
@@ -66,11 +65,15 @@ class Renderer():
 
     def renderIndexHtml(self, articles, pages):
         """ Render a homepage to index.html in the build directory """
-        num_pages = math.ceil(len(articles)/MAX_ARTICLES_PER_PAGE)
-        for i in range(num_pages):
-            pass
-        print('length: ', len(articles))
-
+        # fancy python code to chunk the articles array into one per page
+        articles_by_page = [articles[i:i+MAX_ARTICLES_PER_PAGE] for i in range(0, len(articles), MAX_ARTICLES_PER_PAGE)]
+        for i in articles_by_page:
+            if i != 0: 
+                prev_link = "foobar"
+            if i != len(articles_by_page-1):
+                next_link = "foobar"
+            print('******************************************************')
+            print('articles in page', len(x))
 
     def renderCategoryPages(self, articles):
         pass
