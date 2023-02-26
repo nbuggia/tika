@@ -66,14 +66,12 @@ class Renderer():
         """ Render a homepage to index.html in the build directory """
         # fancy python code to chunk articles into one array per page
         articles_by_page = [articles[i:i+MAX_ARTICLES_PER_PAGE] for i in range(0, len(articles), MAX_ARTICLES_PER_PAGE)]
-        for i, page_x in articles_by_page:
-            print('index:     ', i)
-            print('    count: ', len(page_x))
+        for i, page_x in enumerate(articles_by_page):
             page_content = {}
             page_content['title'] = TITLE
-            if i != 0: 
+            if i > 0: 
                 page_content['prev_link'] = "foobar"
-            if i != len(articles_by_page-1):
+            if i < len(articles_by_page)-1:
                 page_content['next_link'] = "foobar"
             page_content['page_articles'] = page_x
 
@@ -173,7 +171,7 @@ class TikaEngine():
         renderer.loadTemplates("./themes/default/templates/")
 
         # TODO - make 'clean' an option somewhere
-        #shutil.rmtree("./build")
+        shutil.rmtree("./build")
 
         if not os.path.exists ('build'):
             os.mkdir('build')
