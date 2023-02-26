@@ -52,28 +52,30 @@ class Renderer():
     def renderArticles(self, articles):
         """ Render an html page in the build directory for each article """
         for article in articles:
+            os.makedirs(os.path.dirname(article['destination_path']), exist_ok=True)
             with open(article['destination_path'], mode="w", encoding="utf-8") as out_file:
-                os.makedirs(os.path.dirname(article['destination_path']), exist_ok=True)
                 out_file.write(self.article_template.render(article))
     
     def renderCustomPages(self, pages):
         """ Render an html page in the build directory for each custom page """
         for page in pages:
             with open(page['destination_path'], mode="w", encoding="utf-8") as out_file:
-                os.makedirs(os.path.dirname(page['destination_path']), exist_ok=True)
                 out_file.write(self.article_template.render(page))
 
     def renderIndexHtml(self, articles, pages):
         """ Render a homepage to index.html in the build directory """
-        # fancy python code to chunk the articles array into one per page
+        # fancy python code to chunk articles into one array per page
         articles_by_page = [articles[i:i+MAX_ARTICLES_PER_PAGE] for i in range(0, len(articles), MAX_ARTICLES_PER_PAGE)]
-        for i in articles_by_page:
+        for i, page_x in articles_by_page:
+            print('index:     ', i)
+            print('    count: ', len(page_x))
+            page_content = {}
+            page_content['title'] = TITLE
             if i != 0: 
-                prev_link = "foobar"
+                page_content['prev_link'] = "foobar"
             if i != len(articles_by_page-1):
-                next_link = "foobar"
-            print('******************************************************')
-            print('articles in page', len(x))
+                page_content['next_link'] = "foobar"
+            page_content['page_articles'] = page_x
 
     def renderCategoryPages(self, articles):
         pass
@@ -170,16 +172,19 @@ class TikaEngine():
         renderer = Renderer()
         renderer.loadTemplates("./themes/default/templates/")
 
+        # TODO - make 'clean' an option somewhere
+        #shutil.rmtree("./build")
+
         if not os.path.exists ('build'):
             os.mkdir('build')
 
-        articles = self.__processArticles()
-        renderer.renderArticles(articles)
+        self.__processAssets()
 
         pages = self.__processCustomPages()
         renderer.renderCustomPages(pages)
 
-        self.__processAssets()
+        articles = self.__processArticles()
+        renderer.renderArticles(articles)
 
         renderer.renderIndexHtml(articles, pages)
 
