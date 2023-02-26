@@ -7,13 +7,14 @@ This script will parse the content directory and use the theme directory to
 render a static site. Still need to figure out the mechanism for deployment.
 
 Typical usage example:
-
+$ pip3 install -r requirements.txt 
 $ ./tika.py
 """
 
 import os
 import shutil
 import datetime
+import math
 import frontmatter
 import markdown
 import jinja2
@@ -65,6 +66,9 @@ class Renderer():
 
     def renderIndexHtml(self, articles, pages):
         """ Render a homepage to index.html in the build directory """
+        num_pages = math.ceil(len(articles)/MAX_ARTICLES_PER_PAGE)
+        for i in range(num_pages):
+            pass
         print('length: ', len(articles))
 
 
