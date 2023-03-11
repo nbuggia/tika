@@ -112,10 +112,14 @@ class TikaEngine():
         elif "custom" == type:
             return './build' + sep + file
 
-    def __parseDate(self, slug):
+    def __parseDate(self, destination):
         """ Extracts the date from the slug """
-        dateString = slug[0:10].strip()
-        return datetime.datetime.strptime(dateString, '%Y-%m-%d')
+        # TODO: Need to check if there is a category, then trim it off, then convert to sentence case. 
+        print(os.path.splitext(destination)[0])
+        return destination
+
+    def __parseCategory(self, path):
+        return
 
     def __processArticles(self):
         """ Loads all markdown files from ./content/articles into array """
@@ -123,20 +127,22 @@ class TikaEngine():
         for dirpath, dirs, files in os.walk('./content/articles'):
             for file in files:
                 file_name_path = os.path.join(dirpath, file)
-                if file_name_path.endswith('.md'):
-                    article = {}                        
-                    article['slug'] = os.path.splitext(file)[0]
-                    article['destination_path'] = self.__createDestinationPath("articles", dirpath, file)
-                    article['date'] = self.__parseDate(article['slug'])
-                    with open(file_name_path) as file_stream:
-                        raw = file_stream.read()
-                        front_matter, content_md = frontmatter.parse(raw)
-                        article['content_html'] = markdown.markdown(content_md)
-                        # front matter attributes are also added so they are accessible in the template
-                        article.update(front_matter)
-                    # convert all keys to lowercase for consistency
-                    article = {k.lower(): v for k, v in article.items()}
-                    articles.append(article)
+                if not file_name_path.endswith('.md'):
+                    continue
+                article = {}                        
+                article['slug'] = os.path.splitext(file)[0]
+                article['destination_path'] = self.__createDestinationPath("articles", dirpath, file)
+                article['category'] = self.__parseCategory(article['destination_path'])
+                article['date'] = self.__parseDate(article['slug'])
+                with open(file_name_path) as file_stream:
+                    raw = file_stream.read()
+                    front_matter, content_md = frontmatter.parse(raw)
+                    article['content_html'] = markdown.markdown(content_md)
+                    # front matter attributes are also added so they are accessible in the template
+                    article.update(front_matter)
+                # convert all keys to lowercase for consistency
+                article = {k.lower(): v for k, v in article.items()}
+                articles.append(article)
         # sort descending by date
         articles.sort(key = lambda x:x['date'], reverse = True)
         return articles
