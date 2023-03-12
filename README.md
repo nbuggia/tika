@@ -5,10 +5,6 @@ A personal static site generator written in python
 
 * Supports 1-level of categories. 
 
-## Bugs
-
-[ ] Doesn't copy over any article not in a folder
-
 ## TODO
 
 [ ] Where do we pull the date from? URL or from Frontmatter?
