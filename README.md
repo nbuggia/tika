@@ -32,6 +32,7 @@ Example of the articles array:
     [{
         'slug': '2020-10-25-Beef-Stew', 
         'destination_path': './build/articles/recipes/soups/2020-10-25-Beef-Stew.html', 
+        'category': 'Recipies',
         'date': datetime.datetime(2020, 10, 25, 0, 0), 
         'content_html': 'HTML_PAGE_CONTENT', 
         'title': 'Beef Stew', 

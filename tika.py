@@ -119,10 +119,10 @@ class TikaEngine():
     def __parseCategory(self, path):
         """ Extracts the the Category name from the path """
         category = ""
-        # An article path in the build directory is 5 segments if a category
+        # An article path in the build directory is 5 segments if a category is specified
         if len(path.split(os.path.sep)) == 5:
-            category = path.split(os.path.sep)[3]
-        return category.title()
+            category = (path.split(os.path.sep)[3]).title()
+        return category
 
     def __processArticles(self):
         """ Loads all markdown files from ./content/articles into array """
@@ -136,7 +136,6 @@ class TikaEngine():
                 article['slug'] = os.path.splitext(file)[0]
                 article['destination_path'] = self.__createDestinationPath("articles", dirpath, file)
                 article['category'] = self.__parseCategory(article['destination_path'])
-                print("Category: ", article['category'])
                 article['date'] = self.__parseDate(article['slug'])
                 with open(file_name_path) as file_stream:
                     raw = file_stream.read()
