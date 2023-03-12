@@ -84,6 +84,11 @@ class Renderer():
                 out_file.write(self.index_template.render(page_content))
 
     def renderCategoryPages(self, articles):
+        """ Render a page listing all articles within a Category in the Build director """
+
+        # get list of categories
+
+        # for each category, get all the articles
         pass
 
     def renderArchivePage(self, articles):
