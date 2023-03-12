@@ -188,11 +188,11 @@ class TikaEngine():
         renderer.loadTemplates("./themes/default/templates/")
 
         # TODO - make 'clean' an option somewhere
-        # TODO - this fails if the build directory doesn't exist
-        shutil.rmtree("./build")
+        if os.path.exists("./build"):
+            shutil.rmtree("./build")
 
-        if not os.path.exists ('build'):
-            os.mkdir('build')
+        if not os.path.exists ("./build"):
+            os.mkdir("./build")
 
         self.__processAssets()
 
