@@ -104,22 +104,25 @@ class TikaEngine():
 
     def __createDestinationPath(self, type, dirpath, file):
         """ Computes the build directory path for each content type """
-        sep = os.path.sep
         if "articles" == type:
-            path = os.path.join(*(dirpath.split(sep)[2:]))
+            path = os.path.join(*(dirpath.split(os.path.sep)[2:]))
             file_without_ext = os.path.splitext(file)[0]
-            return './build' + sep + path + sep + file_without_ext + '.html'
+            return './build' + os.path.sep + path + os.path.sep + file_without_ext + '.html'
         elif "custom" == type:
-            return './build' + sep + file
+            return './build' + os.path.sep + file
 
-    def __parseDate(self, destination):
+    def __parseDate(self, slug):
         """ Extracts the date from the slug """
-        # TODO: Need to check if there is a category, then trim it off, then convert to sentence case. 
-        print(os.path.splitext(destination)[0])
-        return destination
+        dateString = slug[0:10].strip()
+        return datetime.datetime.strptime(dateString, '%Y-%m-%d')
 
     def __parseCategory(self, path):
-        return
+        """ Extracts the the Category name from the path """
+        category = ""
+        # An article path in the build directory is 5 segments if a category
+        if len(path.split(os.path.sep)) == 5:
+            category = path.split(os.path.sep)[3]
+        return category.title()
 
     def __processArticles(self):
         """ Loads all markdown files from ./content/articles into array """
@@ -133,12 +136,13 @@ class TikaEngine():
                 article['slug'] = os.path.splitext(file)[0]
                 article['destination_path'] = self.__createDestinationPath("articles", dirpath, file)
                 article['category'] = self.__parseCategory(article['destination_path'])
+                print("Category: ", article['category'])
                 article['date'] = self.__parseDate(article['slug'])
                 with open(file_name_path) as file_stream:
                     raw = file_stream.read()
                     front_matter, content_md = frontmatter.parse(raw)
                     article['content_html'] = markdown.markdown(content_md)
-                    # front matter attributes are also added so they are accessible in the template
+                    # front matter attributes are appended so they are accessible in the template
                     article.update(front_matter)
                 # convert all keys to lowercase for consistency
                 article = {k.lower(): v for k, v in article.items()}
@@ -185,6 +189,7 @@ class TikaEngine():
         renderer.loadTemplates("./themes/default/templates/")
 
         # TODO - make 'clean' an option somewhere
+        # TODO - this fails if the build directory doesn't exist
         shutil.rmtree("./build")
 
         if not os.path.exists ('build'):
