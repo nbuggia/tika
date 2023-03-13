@@ -85,11 +85,22 @@ class Renderer():
 
     def renderCategoryPages(self, articles):
         """ Render a page listing all articles within a Category in the Build director """
+        # Get the list of categories, remove the blank for no catgory
+        categories = []
+        for article in articles:
+            if not article['category'] in categories:
+                categories.append(article['category'])
+        if '' in categories:
+            categories.remove('')
+        print("Categories: ", categories)
 
-        # get list of categories
-
-        # for each category, get all the articles
-        pass
+        # Render a page with the article list within each category
+        for c in categories:
+            for a in articles:
+                pass
+            pass
+        
+        return "Category"
 
     def renderArchivePage(self, articles):
         pass
@@ -207,6 +218,7 @@ class TikaEngine():
         renderer.renderArticles(articles)
 
         renderer.renderIndexHtml(articles, pages)
+        renderer.renderCategoryPages(articles)
 
 ###
 # main()
