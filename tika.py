@@ -97,6 +97,7 @@ class Renderer():
         # Render a page with the article list within each category
         for c in categories:
             for a in articles:
+                self.renderArchivePage(a)
                 pass
             pass
         
