@@ -1,6 +1,6 @@
-﻿---
+---
 title: New England Baked Beans
-ingredients: 1 lbs dried navy beans (2.5 cups); 1/4 lbs think bacon; 1 medium onion; 1/4 cup maple syrup; 1/3 cup molasses; 1/8 cup brown sugar (packed); 1 tablespoon worchestershire sauce; 1 table spoon ground mustard seed; 1/2 teaspoon salt; fresh ground black pepper; 1/4 teaspoon apple cider vinager 
+ingredients: 1 lbs dried navy beans (2.5 cups); 1/4 lbs think bacon; 1 medium onion; 1/4 cup maple syrup; 1/3 cup molasses; 1/8 cup brown sugar (packed); 1 tablespoon worchestershire sauce; 1 table spoon ground mustard seed; 1/2 teaspoon salt; fresh ground black pepper; 1/4 teaspoon apple cider vinager
 prep: 20 min
 cook: 1 hour
 ---
@@ -20,7 +20,6 @@ put them in the instant pot for 65 minutes this time, since the 55 minutes was j
 
 1 lbs dried navy beans (2.5 cups); 1/4 lbs think bacon; 1 medium onion; 1/4 cup maple syrup; 1/3 cup molasses; 1/4 cup brown sugar (packed); 1 tablespoon worchestershire sauce; 1 table spoon ground mustard seed; 1/2 teaspoon salt; fresh ground black pepper; 1/4 teaspoon apple cider vinager
 
-
 3/21/2019
 I started buying navy beans in bulk because Whole Foods stopped selling the 1lbs bag. I used 2 cups instead of 1lbs. I didn't have maple suryp, so I ignored it. Beans turned out great. Still needed to be reduced in instant pot afterwards. 
 
@@ -35,4 +34,4 @@ It was a bit too sweet. Maybe cut the brown sugar in half next time.
 Cut the brown sugar in half this time, or 2/3's of the 1/4 cup filled. We cooked for 59 minutes. Making during the pandemic. It has been difficult to find navy beans. 
 
 8/9/2020
-Same as the 6/1 recipe. Still in COVID-19 world. It is now possible to find navy beans, but still much harder than it used to be. 
+Same as the 6/1 recipe. Still in COVID-19 world. It is now possible to find navy beans, but still much harder than it used to be.

@@ -168,12 +168,14 @@ class TikaEngine():
                 with open(file_name_path) as file_stream:
                     raw = file_stream.read()
                     front_matter, content_md = frontmatter.parse(raw)
+                    print("Frontmatter: ", front_matter)
+                    print("-------------")
                     article['content_html'] = markdown.markdown(content_md)
                     # front matter attributes are appended so they are accessible in the template
                     article.update(front_matter)
+                articles.append(article)
                 # convert all keys to lowercase for consistency
                 article = {k.lower(): v for k, v in article.items()}
-                articles.append(article)
         # sort descending by date
         articles.sort(key = lambda x:x['date'], reverse = True)
         return articles
