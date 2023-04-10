@@ -43,6 +43,25 @@ class Renderer():
     def __init__(self):
         pass
 
+    def __computePagination(self, current_page, page_count):
+        """ Computes filename, previous link, next link """ 
+        page_filename = "./build/index.html"
+        if current_page > 0:
+            # Page two or above, override default with computed filename
+            page_filename = './build/index%s.html' % (current_page+1)
+        prev_link = ""
+        if current_page == 1:
+            # Second page, account for special first page filename
+            prev_link = "./index.html"
+        elif current_page > 1:
+            # Third page or above, compute link
+            prev_link = './index%s.html' % (current_page)
+        next_link = ""
+        if current_page < page_count-1:
+            # there is a next page
+            next_link = './index%s.html' % (current_page+2)
+        return page_filename, prev_link, next_link
+
     def loadTemplates(self, templates_path):
         """ Loads Jinja rendering templates from the theme directory """
         environment = jinja2.Environment(loader=jinja2.FileSystemLoader(templates_path))
@@ -71,20 +90,12 @@ class Renderer():
             page_content = {}
             page_content['title'] = TITLE
             page_content['page_articles'] = page_x
-            if i > 0: 
-                # only show prev link if we're not on the first page. 
-                page_content['prev_link'] = "foobar"
-                # compute the name each subsequent page
-                page_filename = './build/index%s.html' % (i+1)
-            else:
-                page_filename = "./build/index.html"
-            if i < len(articles_by_page)-1:
-                page_content['next_link'] = './index%s.html' % (i+2)
+            page_filename, page_content['prev_link'], page_content['next_link'] = self.__computePagination(i, len(articles_by_page))
             with open(page_filename, mode="w", encoding="utf-8") as out_file:
                 out_file.write(self.index_template.render(page_content))
 
     def renderCategoryPages(self, articles):
-        """ Render a page listing all articles within a Category in the Build director """
+        """ Render a page listing of all articles within a Category """
         # Get the list of categories, remove the blank for no catgory
         categories = []
         for article in articles:
