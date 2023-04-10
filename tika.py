@@ -79,7 +79,7 @@ class Renderer():
             else:
                 page_filename = "./build/index.html"
             if i < len(articles_by_page)-1:
-                page_content['next_link'] = "foobar"
+                page_content['next_link'] = './index%s.html' % (i+2)
             with open(page_filename, mode="w", encoding="utf-8") as out_file:
                 out_file.write(self.index_template.render(page_content))
 
