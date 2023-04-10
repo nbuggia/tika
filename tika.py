@@ -141,7 +141,7 @@ class TikaEngine():
             category = (path.split(os.path.sep)[3]).title()
         return category
 
-    def __processArticles(self):
+    def __loadArticles(self):
         """ Loads all markdown files from ./content/articles into array """
         articles = []
         for dirpath, dirs, files in os.walk('./content/articles'):
@@ -167,7 +167,7 @@ class TikaEngine():
         articles.sort(key = lambda x:x['date'], reverse = True)
         return articles
 
-    def __processCustomPages(self):
+    def __loadCustomPages(self):
         """ Loads all custom pages from ./content/pages directory into array """
         pages = []
         for dirpath, dirs, files in os.walk("./content/pages"): 
@@ -182,7 +182,7 @@ class TikaEngine():
                     pages.append(page)
         return pages
 
-    def __processAssets(self):
+    def __loadAssets(self):
         """ Move all static assets into the build directory """
         if os.path.exists("./build/images"):
             shutil.rmtree("./build/images")
@@ -210,12 +210,12 @@ class TikaEngine():
         if not os.path.exists ("./build"):
             os.mkdir("./build")
 
-        self.__processAssets()
+        self.__loadAssets()
 
-        pages = self.__processCustomPages()
+        pages = self.__loadCustomPages()
         renderer.renderCustomPages(pages)
 
-        articles = self.__processArticles()
+        articles = self.__loadArticles()
         renderer.renderArticles(articles)
 
         renderer.renderIndexHtml(articles, pages)
