@@ -47,7 +47,7 @@ class Renderer():
         """ Computes filename, previous link, next link """ 
         page_filename = "./build/index.html"
         if current_page > 0:
-            # Page two or above, override default with computed filename
+            # Second page or above, override default with computed filename
             page_filename = './build/index%s.html' % (current_page+1)
         prev_link = ""
         if current_page == 1:

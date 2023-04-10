@@ -1,3 +1,10 @@
+---
+title: Mushroom Risotto
+ingredients: 1 onion; 2 garlic cloves; 2 lemons; parsley; 1 cup white wine; olive oil
+prep: 10 min
+cook: 40 min 
+---
+
 Mushroom Risotto (these risotto recipes feed 2 very comfortably) 
 Arborio rice (the “risotto” rice. You can find at TJs in a red box or in most 
 grocery stores, where it can be quite a bit more expensive. You’ll need about 1 
