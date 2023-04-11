@@ -29,7 +29,6 @@ THEME = 'default'
 
 # used for pagination across the site
 MAX_ARTICLES_PER_PAGE = 10
-
 FEED_MAX_ARTICLES = 10
 FEED_SHOW_FULL_ARTICLE = 'true' 
 
@@ -72,14 +71,14 @@ class Renderer():
     def renderArticles(self, articles):
         """ Render an html page in the build directory for each article """
         for article in articles:
-            os.makedirs(os.path.dirname(article['destination_path']), exist_ok=True)
-            with open(article['destination_path'], mode="w", encoding="utf-8") as out_file:
+            os.makedirs(os.path.dirname(article['build_path']), exist_ok=True)
+            with open(article['build_path'], mode="w", encoding="utf-8") as out_file:
                 out_file.write(self.article_template.render(article))
     
     def renderCustomPages(self, pages):
         """ Render an html page in the build directory for each custom page """
         for page in pages:
-            with open(page['destination_path'], mode="w", encoding="utf-8") as out_file:
+            with open(page['build_path'], mode="w", encoding="utf-8") as out_file:
                 out_file.write(self.article_template.render(page))
 
     def renderIndexHtml(self, articles, pages):
@@ -126,7 +125,7 @@ class TikaEngine():
     def __init__(self):
         pass
 
-    def __createDestinationPath(self, type, dirpath, file):
+    def __createBuildPath(self, type, dirpath, file):
         """ Computes the build directory path for each content type """
         if "articles" == type:
             path = os.path.join(*(dirpath.split(os.path.sep)[2:]))
@@ -158,8 +157,9 @@ class TikaEngine():
                     continue
                 article = {}                        
                 article['slug'] = os.path.splitext(file)[0]
-                article['destination_path'] = self.__createDestinationPath("articles", dirpath, file)
-                article['category'] = self.__parseCategory(article['destination_path'])
+                article['build_path'] = self.__createBuildPath("articles", dirpath, file)
+                article['category'] = self.__parseCategory(article['build_path'])
+                article['url'] = os.path.join(*(article['build_path'].split(os.path.sep)[2:]))
                 article['date'] = self.__parseDate(article['slug'])
                 with open(file_name_path) as file_stream:
                     raw = file_stream.read()
@@ -183,7 +183,7 @@ class TikaEngine():
                 if file_name_path.endswith('.html'):
                     page = {}
                     page['title'] = os.path.splitext(file)[0].title()
-                    page['destination_path'] = self.__createDestinationPath("custom", dirpath, file)
+                    page['build_path'] = self.__createBuildPath("custom", dirpath, file)
                     with open(file_name_path) as file_stream: 
                         page['content_html'] = file_stream.read()
                     pages.append(page)
@@ -214,6 +214,7 @@ class TikaEngine():
         # Clean the build directory everytime
         if os.path.exists("./build"):
             shutil.rmtree("./build")
+            print("Cleaned build directory")
         if not os.path.exists ("./build"):
             os.mkdir("./build")
 
@@ -227,6 +228,8 @@ class TikaEngine():
 
         renderer.renderIndexHtml(articles, pages)
         renderer.renderCategoryPages(articles)
+
+        print(f'Rendered {len(articles)} article(s) and {len(pages)} custom page(s).')
 
 ###
 # main()

@@ -1,9 +1,10 @@
 # Tika
-A personal static site generator written in python
+A personal static site generator in python
 
 ## Notes
 
-* Supports 1-level of categories. 
+* Supports 1-level of categories.
+* Deploys through GitHub or GitLab Pages. 
 
 ## TODO
 
@@ -14,25 +15,23 @@ A personal static site generator written in python
 [ ] How do we deploy? 
 [ ] Make "clean" build directory an option somewhere
 
+## Dev notes
 
-## Python environment
+### Setup environment
 
 Install dependent modules
 
     pip3 install -r requirements.txt 
     python3 -m pip install --upgrade pip
 
-To run the app:
-
-    ./tika.py
-
-## Dev notes
+### Data structures
 
 Example of the articles array:
 
     [{
         'slug': '2020-10-25-Beef-Stew', 
-        'destination_path': './build/articles/recipes/soups/2020-10-25-Beef-Stew.html', 
+        'build_path': './build/articles/recipes/soups/2020-10-25-Beef-Stew.html', 
+        'url': './articles/recipes/soups/2020-10-25-Beef-Stew.html', 
         'category': 'Recipies',
         'date': datetime.datetime(2020, 10, 25, 0, 0), 
         'content_html': 'HTML_PAGE_CONTENT', 
@@ -43,12 +42,3 @@ Example of the articles array:
             2 cups French lentils; 1 pound boneless, skinless chicken thighs 
             (See Recipe Note); Grated Parmesan or Romano cheese, for serving'
     }]
-
-
-### This is what the articles data structure
-
-## GitHub configuration
-
-Set git email to the GitHub privacy account: 594357+nbuggia@users.noreply.github.com
-
-Provision a developer access token, use that as your password
