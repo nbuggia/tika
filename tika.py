@@ -3,8 +3,8 @@
 
 """ Tika: A static site generator in python for personal blogs or whatever.
 
-This script will parse the content directory and use the theme directory to 
-render a static site. Still need to figure out the mechanism for deployment.
+This script will parse the './content' directory and use the './theme' directory 
+to render a static site.
 
 Typical usage example:
 $ pip3 install -r requirements.txt 
@@ -26,6 +26,7 @@ TITLE = 'Nathan Buggia'
 AUTHOR = 'nathan'
 URL = 'https://www.nathanbuggia.com/'
 THEME = 'default'
+HEADER_IMAGE = "./images/instagram.png"
 
 # used for pagination across the site
 MAX_ARTICLES_PER_PAGE = 10
@@ -81,33 +82,24 @@ class Renderer():
             with open(page['build_path'], mode="w", encoding="utf-8") as out_file:
                 out_file.write(self.article_template.render(page))
 
-    def renderIndexHtml(self, articles, pages):
+    def renderIndexHtml(self, articles, categories, pages):
         """ Render a homepage to index.html in the build directory """
         # fancy python code to chunk articles into one array per page
         articles_by_page = [articles[i:i+MAX_ARTICLES_PER_PAGE] for i in range(0, len(articles), MAX_ARTICLES_PER_PAGE)]
         for i, page_x in enumerate(articles_by_page):
             page_content = {}
             page_content['title'] = TITLE
+            page_content['header_image'] = HEADER_IMAGE
             page_content['page_articles'] = page_x
+            page_content['categories'] = categories
+            page_content['custom_pages'] = pages
             page_filename, page_content['prev_link'], page_content['next_link'] = self.__computePagination(i, len(articles_by_page))
             with open(page_filename, mode="w", encoding="utf-8") as out_file:
                 out_file.write(self.index_template.render(page_content))
 
-    def renderCategoryPages(self, articles):
+    def renderCategoryPages(self, categories):
         """ Render a page listing of all articles within a Category """
-        # Get the list of categories, remove the blank for no catgory
-        categories = []
-        for article in articles:
-            if not article['category'] in categories:
-                categories.append(article['category'])
-        if '' in categories:
-            categories.remove('')
-        # Render a page with the article list within each category
-        for c in categories:
-            for a in articles:
-                self.renderArchivePage(a)
-                # TODO - you left off here
-        return "Category"
+        pass
 
     def renderArchivePage(self, articles):
         pass
@@ -142,14 +134,16 @@ class TikaEngine():
     def __parseCategory(self, path):
         """ Extracts the the Category name from the path """
         category = ""
-        # An article path in the build directory is 5 segments if a category is specified
         if len(path.split(os.path.sep)) == 5:
+            # A category has been specificed if the article path is 5 segments
+            # in this way, we only support 1-level of categories.
             category = (path.split(os.path.sep)[3]).title()
         return category
 
     def __loadArticles(self):
         """ Loads all markdown files from ./content/articles into array """
         articles = []
+        # traverse all directorys under articles for markdown files
         for dirpath, dirs, files in os.walk('./content/articles'):
             for file in files:
                 file_name_path = os.path.join(dirpath, file)
@@ -165,14 +159,24 @@ class TikaEngine():
                     raw = file_stream.read()
                     front_matter, content_md = frontmatter.parse(raw)
                     article['content_html'] = markdown.markdown(content_md)
-                    # front matter attributes are appended so they are accessible in the template
+                    # front matter attributes are appended so they are 
+                    # accessible in rendering templates
                     article.update(front_matter)
                 articles.append(article)
                 # convert all keys to lowercase for consistency
                 article = {k.lower(): v for k, v in article.items()}
-        # sort descending by date
+        # sort articles to show the newest first
         articles.sort(key = lambda x:x['date'], reverse = True)
-        return articles
+
+        # extract the list of unique categories from articles
+        categories = []
+        for article in articles:
+            if not article['category'] in categories:
+                categories.append(article['category'])
+        if '' in categories:
+            categories.remove('')
+
+        return articles, categories
 
     def __loadCustomPages(self):
         """ Loads all custom pages from ./content/pages directory into array """
@@ -223,13 +227,13 @@ class TikaEngine():
         pages = self.__loadCustomPages()
         renderer.renderCustomPages(pages)
 
-        articles = self.__loadArticles()
+        articles, categories = self.__loadArticles()
         renderer.renderArticles(articles)
 
-        renderer.renderIndexHtml(articles, pages)
-        renderer.renderCategoryPages(articles)
+        renderer.renderIndexHtml(articles,categories, pages)
+        renderer.renderCategoryPages(categories)
 
-        print(f'Rendered {len(articles)} article(s) and {len(pages)} custom page(s).')
+        print(f'Rendered {len(articles)} articles in {len(categories)} categories and {len(pages)} custom pages.')
 
 ###
 # main()

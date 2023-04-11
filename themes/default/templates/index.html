@@ -5,6 +5,11 @@
 <meta name="description" content="{{summary}}">
 {% endblock head %}
 
+{% block page_header %}
+<p id="header-image"><a class="logo" href="/"><img src="{{header_image}}" /></a></p>
+<p id="blog-title"><a href="/" class="blog-title subtle">{{title}}</a></p>
+{% endblock page_header %}
+
 {% block content %}
 <section id="articles">
 	<ol>
@@ -34,3 +39,16 @@
 	</div>
 </div>
 {% endblock content %}
+
+{% block footer_categories %}
+<h4>Writing</h4>
+<section id="categories">
+	<ul>
+		{% for category in categories %}
+		<li>
+			<a href="#">{{category}}</a>
+		</li>
+		{% endfor %}
+	</ul>
+</section>
+{% endblock footer_categories %}
