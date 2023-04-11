@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    
+<title>Basic Blog Framework in Ruby</title>
+<meta name="description" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<script type="text/javascript" src="//use.typekit.net/xgg5zca.js"></script>
+	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+	
+	<link href="theme/css/bootstrap.css" rel="stylesheet">
+	<link href="theme/css/theme.css" rel="stylesheet">
+	<link href="theme/css/bootstrap-responsive.css" rel="stylesheet">	
+		
+</head>
+<body>
+	<!-- HEADER -->
+    <!-- removed for simplicity -->
+
+    <!-- RENDERING TEMPLATE CONTENT -->
+	<div id="content" class="wrapper">	
+		<div class="container-fluid content-strip">
+			<div class="row-fluid">			
+				<div class="posts">
+                
+<header>
+	<h1>Basic Blog Framework in Ruby</h1>
+</header>
+
+<article> 
+	<section class="post-details">
+		<time>2013-03-07 00:00:00</time>
+	</section>
+	<section><p>For my hobby project this winter, I wanted to try out a new language, something that was distinctly non-microsoft. I decided to try out Ruby to learn about the language before trying out a bigger project in Rails. I have been a fan of ASP.net MVC, so it was exciting to learn more about where these designs came from. I created a simple blog framework on top of Rack.</p>
+<ol>
+<li><a href="https://github.com/nbuggia/baron-blog">Blog Template on GitHub</a></li>
+<li><a href="https://github.com/nbuggia/baron-blog-engine-gem">Blog Framework Gem on GitHub</a></li>
+</ol>
+<p>So far I like Ruby a lot. It has all the benefits of an inturpretted language. It also has a large and active community that has built everything you can imagine, open sources and complete with unit tests and documentation. </p>
+<p>The packaging system is called <a href="https://rubygems.org">GEMs</a>, also written in Ruby. Works really well. I used a gem (called <a href="https://rubygems.org/gems/jeweler">Jeweler</a>) to encapsulate all the logic of the blog engine and publish the <a href="https://rubygems.org/gems/baron">blog engine</a> to the packaging system library. The Blog Template project includes the blog template and content. It refrences the blog engine gem.</p>
+<p>One of the principles of the Ruby community is that languages should be easy to read and expressive. To support that, they use the concept of domain specific languages (DSL) to create special purpose, expressive languages for everything. My favorite was <a href="https://cucumber.io/">Cucumber</a>, a langauge for expressing use cases and aligning them with automated tests. Another application, RSpec, is used for testing. </p>
+<p>The Ruby language has some functionality that make it very productive. In the example method below, <code>get_all_categories</code>, the <code>map</code> method takes the list of folders inside your blog, builds a poor-man's struct (e.g. JSON) to turn each one into a category object, and then sorts them by their name property. It may not be the fastest, but the productivity gains are a worthwhile tradeoff in many cases. </p>
+<pre><code>def get_all_categories
+    Dir["#{get_articles_path}/*/"].map do |a| 
+    folder_name = File.basename(a)
+    {
+        name: titlecase(folder_name),
+        node_name: folder_name.gsub(' ', '-'),
+        path: "/#{@config[:permalink_prefix]}/#{folder_name.gsub(' ', '-')}/".squeeze('/'),
+        count: Dir["#{get_articles_path}/#{folder_name}/*"].count 
+    }
+    end .
+    sort_by { |hash| hash[:name] }
+end
+</code></pre>
+<p>The community is very active. There were a lot of great resources to get me started. A few unique to the ruby community include: </p>
+<ul>
+<li>Railscasts: <a href="http://railscasts.com/">http://railscasts.com/</a></li>
+<li>Rails for zombies: <a href="http://railsforzombies.org/">http://railsforzombies.org/</a> </li>
+<li>Rspec: <a href="http://rspec.info/">http://rspec.info/</a></li>
+</ul>
+<p>This was a particularly memorable project because I wrote it while on a brief sabbatical I took in Barcelona to complete a Spanish immersion program. For a month over Christmas 2013, I stayed with the welcoming and generous Fernandez family just outside of Eixample, where the Sagrada Familia is almost complete. I would have breakfast with the family, go to classes until 1pm, and then I would go to a library for a couple hours to code, before walking around the city until midnight. A couple of my favorite places were <a href="https://www.google.com/search?q=La+Foixarda">La Foixarda</a>, the <a href="https://www.google.com/search?q=gothic+quarter+barcelona">Gothic Quarter</a> and <a href="https://en.wikipedia.org/wiki/Montju%C3%AFc">Montjuic</a>.</p></section>
+</article>
+ 
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- CATEGORIES -->
+    <!-- removed for simplicity -->
+		
+	<!-- FOOTER -->
+	<div id="footer" class="wrapper footer-wrapper">
+		<div class="container-fluid content-strip">
+			<footer class="row-fluid">
+				<p> &copy; 2001-<script>document.write(new Date().getFullYear());</script> &bull;
+					All rights reserved &bull;
+					Powered by the <a class="subtle" href="https://github.com/nbuggia/tika">Tika static site generator.</a></p>
+			</footer>
+		</div>
+	</div>	
+</body>
+</html>

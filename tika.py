@@ -44,7 +44,7 @@ class Renderer():
         pass
 
     def __computePagination(self, current_page, page_count):
-        """ Computes filename, previous link, next link """ 
+        """ Computes filename, previous link, and next link for pagination """ 
         page_filename = "./build/index.html"
         if current_page > 0:
             # Second page or above, override default with computed filename
@@ -103,15 +103,11 @@ class Renderer():
                 categories.append(article['category'])
         if '' in categories:
             categories.remove('')
-        print("Categories: ", categories)
-
         # Render a page with the article list within each category
         for c in categories:
             for a in articles:
                 self.renderArchivePage(a)
-                pass
-            pass
-        
+                # TODO - you left off here
         return "Category"
 
     def renderArchivePage(self, articles):
@@ -168,8 +164,6 @@ class TikaEngine():
                 with open(file_name_path) as file_stream:
                     raw = file_stream.read()
                     front_matter, content_md = frontmatter.parse(raw)
-                    print("Frontmatter: ", front_matter)
-                    print("-------------")
                     article['content_html'] = markdown.markdown(content_md)
                     # front matter attributes are appended so they are accessible in the template
                     article.update(front_matter)

@@ -10,7 +10,7 @@
 	<ol>
 		{% for article in page_articles %}
 			<li>
-				<time>{{article.date}}</time>
+				<time>{{article.date.strftime("%b %d, %Y")}}</time>
 				<section class="title">
 					<a href="{{article.url}}">{{article.title}}</a>
 					<span>{{article.category}}</span>

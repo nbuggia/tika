@@ -1,4 +1,0 @@
-.DS_Store
-
-# exclude directory with our rendered site
-build/
