@@ -137,7 +137,7 @@ class TikaEngine():
         if len(path.split(os.path.sep)) == 5:
             # A category has been specificed if the article path is 5 segments
             # in this way, we only support 1-level of categories.
-            category = (path.split(os.path.sep)[3]).title()
+            category = (path.split(os.path.sep)[3])
         return category
 
     def __loadArticles(self):
