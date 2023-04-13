@@ -8,6 +8,7 @@ A personal static site generator in python
 
 ## TODO
 
+[ ] Refactor the Jinja templates. Redundant footer content in each page. 
 [ ] Where do we pull the date from? URL or from Frontmatter?
 [ ] Archived page
 [ ] Category pages

@@ -1,54 +1,57 @@
 {% extends "base.html" %}
 
+
 {% block head %}
-<title>{{title}}</title>
-<meta name="description" content="{{summary}}">
+	<title>{{title}}</title>
+	<meta name="description" content="{{summary}}">
 {% endblock head %}
 
+
 {% block page_header %}
-<p id="header-image"><a class="logo" href="/"><img src="{{header_image}}" /></a></p>
-<p id="blog-title"><a href="/" class="blog-title subtle">{{title}}</a></p>
+	<p id="header-image"><a class="logo" href="/"><img src="{{header_image}}" /></a></p>
+	<p id="blog-title"><a href="/" class="blog-title subtle">{{title}}</a></p>
 {% endblock page_header %}
 
-{% block content %}
-<section id="articles">
-	<ol>
-		{% for article in page_articles %}
-			<li>
-				<time>{{article.date.strftime("%b %d, %Y")}}</time>
-				<section class="title">
-					<a href="{{article.url}}">{{article.title}}</a>
-					<span>{{article.category}}</span>
-				</section>
-			</li>
-		{% endfor %}
-	</ol>
-</section>
 
-<!-- Pagination -->
-<div id="pagination">
-	<div class="left">
-		{% if prev_link %}
-		<a href="{{prev_link}}">&larr; Previous articles</a>
-		{% endif %}
+{% block content %}
+	<section id="articles">
+		<ol>
+			{% for article in page_articles %}
+				<li>
+					<time>{{article.date.strftime("%b %d, %Y")}}</time>
+					<section class="title">
+						<a href="{{article.url}}">{{article.title}}</a>
+						<span>{{article.category}}</span>
+					</section>
+				</li>
+			{% endfor %}
+		</ol>
+	</section>
+	<!-- Pagination -->
+	<div id="pagination">
+		<div class="left">
+			{% if prev_link %}
+			<a href="{{prev_link}}">&larr; Previous articles</a>
+			{% endif %}
+		</div>
+		<div class="right">
+			{% if next_link %}
+			<a href="{{next_link}}">Newer articles &rarr;</a>
+			{% endif %}
+		</div>
 	</div>
-	<div class="right">
-		{% if next_link %}
-		<a href="{{next_link}}">Newer articles &rarr;</a>
-		{% endif %}
-	</div>
-</div>
 {% endblock content %}
 
+
 {% block footer_categories %}
-<h4>Writing</h4>
-<section id="categories">
-	<ul>
-		{% for category in categories %}
-		<li>
-			<a href="#">{{category}}</a>
-		</li>
-		{% endfor %}
-	</ul>
-</section>
+	<h4>Writing</h4>
+	<section id="categories">
+		<ul>
+			{% for category in categories %}
+			<li>
+				<a href="#">{{category}}</a>
+			</li>
+			{% endfor %}
+		</ul>
+	</section>
 {% endblock footer_categories %}
