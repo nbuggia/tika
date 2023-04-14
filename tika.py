@@ -52,14 +52,14 @@ class Renderer():
         prev_link = ""
         if current_page == 1:
             # Second page, account for special first page filename
-            prev_link = "./index.html"
+            prev_link = "/index.html"
         elif current_page > 1:
             # Third page or above, compute link
-            prev_link = './index%s.html' % (current_page)
+            prev_link = '/index%s.html' % (current_page)
         next_link = ""
         if current_page < page_count-1:
             # there is a next page
-            next_link = './index%s.html' % (current_page+2)
+            next_link = '/index%s.html' % (current_page+2)
         return page_filename, prev_link, next_link
 
     def loadTemplates(self, templates_path):
@@ -153,7 +153,7 @@ class TikaEngine():
                 article['slug'] = os.path.splitext(file)[0]
                 article['build_path'] = self.__createBuildPath("articles", dirpath, file)
                 article['category'] = self.__parseCategory(article['build_path'])
-                article['url'] = os.path.join(*(article['build_path'].split(os.path.sep)[2:]))
+                article['url'] = "/" + os.path.join(*(article['build_path'].split(os.path.sep)[2:]))
                 article['date'] = self.__parseDate(article['slug'])
                 with open(file_name_path) as file_stream:
                     raw = file_stream.read()
@@ -165,6 +165,8 @@ class TikaEngine():
                 articles.append(article)
                 # convert all keys to lowercase for consistency
                 article = {k.lower(): v for k, v in article.items()}
+                print(article)
+                print("----------------")
         # sort articles to show the newest first
         articles.sort(key = lambda x:x['date'], reverse = True)
 
