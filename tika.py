@@ -24,9 +24,9 @@ import jinja2
 
 TITLE = 'Nathan Buggia'
 AUTHOR = 'nathan'
-URL = 'https://www.nathanbuggia.com/'
+URL = 'https://www.nathanbuggia.com'
 THEME = 'default'
-HEADER_IMAGE = "./images/instagram.png"
+HEADER_IMAGE = "/images/instagram.png"
 
 # used for pagination across the site
 MAX_ARTICLES_PER_PAGE = 10
@@ -165,8 +165,6 @@ class TikaEngine():
                 articles.append(article)
                 # convert all keys to lowercase for consistency
                 article = {k.lower(): v for k, v in article.items()}
-                print(article)
-                print("----------------")
         # sort articles to show the newest first
         articles.sort(key = lambda x:x['date'], reverse = True)
 
