@@ -15,7 +15,7 @@
 {% block content %}
 	<article> 
 		<section class="post-details">
-			<time>{{date}}</time>
+			<time>{{date.strftime("%b %d, %Y")}}</time>
 		</section>
 		<section>{{content_html}}</section>
 	</article>
