@@ -26,7 +26,7 @@ TITLE = 'Nathan Buggia'
 AUTHOR = 'nathan'
 URL = 'https://www.nathanbuggia.com'
 THEME = 'default'
-HEADER_IMAGE = "/images/instagram.png"
+HEADER_IMAGE = "/images/instagram-small.png"
 
 # used for pagination across the site
 MAX_ARTICLES_PER_PAGE = 10
