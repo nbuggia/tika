@@ -13,7 +13,6 @@ A personal static site generator in python
 [ ] Archived page
 [ ] Category pages
 [ ] Make the articles directory name configurable
-[ ] How do we deploy? 
 [ ] Make "clean" build directory an option somewhere
 
 ## Dev notes
