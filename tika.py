@@ -3,8 +3,8 @@
 
 """ Tika: A static site generator in python for personal blogs or whatever.
 
-This script will parse the './content' directory and use the './theme' directory 
-to render a static site.
+This script will parse the './content' directory and use the styles within the './theme' directory to render the 
+markdown files into HTML pages. The output will be placed in the './build' directory. 
 
 Typical usage example:
 $ pip3 install -r requirements.txt 
