@@ -162,9 +162,9 @@ class TikaEngine():
                     # front matter attributes are appended so they are 
                     # accessible in rendering templates
                     article.update(front_matter)
-                articles.append(article)
                 # convert all keys to lowercase for consistency
                 article = {k.lower(): v for k, v in article.items()}
+                articles.append(article)
         # sort articles to show the newest first
         articles.sort(key = lambda x:x['date'], reverse = True)
 
