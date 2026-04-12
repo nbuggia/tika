@@ -1,0 +1,38 @@
+<% @page_title = @article.title -%>
+<article>
+  <h1><%= @article.title %></h1>
+  <section>
+    <section class="details">
+      <span>
+        Posted on <time class="param"><%= @article.date.strftime("%B %-d, %Y") %></time>
+        by <span class="param"><%= @article.author %></span>
+        <% if @article.category -%>
+        in <span class="param">
+          <a href="/<%= @article.category %>/">
+            <%= @article.category.gsub("-", " ").split.map(&:capitalize).join(" ") %>
+          </a>
+        </span>
+        <% end -%>
+      </span>
+    </section>
+    <section>
+      <%= @article.body %>
+    </section>
+  </section>
+</article>
+
+<% if @config["disqus_shortname"] -%>
+<div id="disqus_thread"></div>
+<script>
+  var disqus_config = function() {
+    this.page.url = "<%= @config["base_url"] %><%= @article.permalink %>";
+    this.page.identifier = "<%= @article.slug %>";
+  };
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://<%= @config["disqus_shortname"] %>.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<% end -%>

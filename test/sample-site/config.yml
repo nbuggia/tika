@@ -1,0 +1,153 @@
+# =============================================================================
+# Tika Site Configuration
+# =============================================================================
+# All settings are optional except where noted. Settings with a default value
+# will fall back to that default if omitted. Settings commented out below are
+# disabled by default — uncomment and fill in to enable.
+
+# -----------------------------------------------------------------------------
+# Site identity
+# -----------------------------------------------------------------------------
+
+# The name of your site. Appears in the browser title bar, Atom feed, and
+# anywhere @config["title"] is referenced in templates.
+title: "Robert Frost"
+
+# The default author name for articles. Used when an article's frontmatter
+# does not specify its own author: field. Also appears in the Atom feed.
+author: "Robert Frost"
+
+# A short description of your site. Used in the <meta name="description"> tag
+# and the Atom feed subtitle.
+description: "Poetry by Robert Frost"
+
+# The canonical base URL of your site, without a trailing slash.
+# Used when building absolute URLs in the Atom feed and robots.txt.
+# For local development use http://localhost:4000.
+# Example: https://www.example.com
+base_url: "http://localhost:4000"
+
+# -----------------------------------------------------------------------------
+# Theme
+# -----------------------------------------------------------------------------
+
+# The name of the theme to use for rendering. Must match a directory name
+# inside themes/. Tika ships with: default, blue, corporate.
+theme: "default"
+
+# Path to the large header image shown on the home page.
+# Must be a root-relative path to a file in content/images/.
+# Example: /images/my-photo.png
+# Leave blank or remove to show no header image.
+header_image: "/images/robert-frost.png"
+
+# Path to the smaller header image shown on all non-home pages.
+# Used so inner pages have a compact header rather than the full hero image.
+# Example: /images/my-photo-small.png
+header_image_small: "/images/robert-frost-small.png"
+
+# -----------------------------------------------------------------------------
+# Content
+# -----------------------------------------------------------------------------
+
+# Directory (relative to the site root) where articles and pages are stored.
+# Articles go in content/articles/, pages in content/pages/.
+# Avoid changing this unless you have a specific reason — themes and the
+# builder assume this structure.
+content_dir: "content"
+
+# Directory (relative to the site root) where the built site is written.
+# This entire directory is regenerated on every build. Do not store files
+# here manually — they will be deleted.
+build_dir: "build"
+
+# Number of articles to show per page on the home page and category pages.
+# Lower values mean more pagination; higher values mean longer pages.
+# Must be a positive integer. Default: 10.
+posts_per_page: 5
+
+# Number of articles to include in the Atom feed.
+# Most feed readers display the 10–20 most recent entries.
+# Must be a positive integer. Default: 20.
+feed_entries: 10
+
+# Whether to include the full article body in the Atom feed (true) or just
+# the summary — content before <!--more--> — (false).
+# Options: true, false
+feed_show_full_article: true
+
+# -----------------------------------------------------------------------------
+# Permalinks
+# -----------------------------------------------------------------------------
+
+# Controls how article URLs are structured.
+# Options:
+#   year_month_day  →  /2014/01/31/mending-wall/   (default)
+#   year_month      →  /2014/01/mending-wall/
+#   flat            →  /mending-wall/
+# Note: changing this after publishing will break existing links and
+# invalidate any external URLs or feed readers that have cached old links.
+permalink_style: "year_month_day"
+
+# Optional prefix prepended to all article permalinks.
+# Useful for namespacing articles when migrating from another blog engine,
+# e.g. if your old URLs were /blog/2014/01/31/mending-wall/.
+# Set to "" (empty string) for no prefix.
+# Do NOT include leading or trailing slashes — Tika adds them automatically.
+# Example: "blog"  →  /blog/2014/01/31/mending-wall/
+permalink_prefix: ""
+
+# -----------------------------------------------------------------------------
+# Date formatting
+# -----------------------------------------------------------------------------
+
+# strftime format string used to display article dates in templates.
+# This controls the output of article.formatted_date in all templates.
+# Reference: https://ruby-doc.org/core/Time.html#method-i-strftime
+# Examples:
+#   "%B %-d, %Y"   →  January 31, 2014   (default)
+#   "%-d %b %Y"    →  31 Jan 2014
+#   "%Y-%m-%d"     →  2014-01-31
+# Note: %-d (no leading zero) is Linux/macOS only. Use %e for portability.
+date_format: "%B %-d, %Y"
+
+# -----------------------------------------------------------------------------
+# Social links (all optional — remove or comment out to hide)
+# -----------------------------------------------------------------------------
+
+# Your Twitter/X username, without the @ sign.
+# Enables the Twitter link in the navigation footer.
+# twitter: "RobertFrost"
+
+# Your LinkedIn profile ID (the part after linkedin.com/in/).
+# linkedin: "RobertFrost"
+
+# Your GitHub username.
+# github: "RobertFrost"
+
+# Your Slideshare username (the part after slideshare.net/).
+# slideshare: "RobertFrost"
+
+# -----------------------------------------------------------------------------
+# Analytics and verification (all optional)
+# -----------------------------------------------------------------------------
+
+# Google Analytics 4 measurement ID.
+# Format: "G-XXXXXXXXXX"
+# Leave commented out to disable analytics entirely.
+# google_analytics_id: ""
+
+# Google Search Console verification token.
+# Added as a <meta name="google-site-verification"> tag in the page <head>.
+# Format: the full token string from Google Search Console.
+# google_webmaster_tools: ""
+
+# -----------------------------------------------------------------------------
+# Comments (optional)
+# -----------------------------------------------------------------------------
+
+# Disqus shortname for your site (the subdomain part of your Disqus URL,
+# e.g. "myblog" if your Disqus URL is myblog.disqus.com).
+# When set, a Disqus comment thread is embedded at the bottom of every article.
+# Leave commented out to disable comments entirely.
+# disqus_shortname: ""

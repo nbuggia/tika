@@ -1,0 +1,7 @@
+require_relative "tika/config"
+require_relative "tika/models/article"
+require_relative "tika/models/page"
+require_relative "tika/renderer"
+require_relative "tika/builder"
+require_relative "tika/server"
+require_relative "tika/cli"

@@ -1,0 +1,17 @@
+<% @page_title = @category.gsub("-", " ").split.map(&:capitalize).join(" ") -%>
+<header>
+  <h1><%= @page_title %></h1>
+</header>
+
+<section id="articles">
+  <ol>
+    <% @articles.each do |article| -%>
+    <li>
+      <time><%= article.date.strftime("%Y-%m-%d") %></time>
+      <section class="title">
+        <a href="<%= article.permalink %>"><%= article.title %></a>
+      </section>
+    </li>
+    <% end -%>
+  </ol>
+</section>

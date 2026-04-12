@@ -1,0 +1,43 @@
+<!-- Article List -->
+<section id="articles">
+  <% @articles.each do |article| -%>
+  <article>
+    <h2><a href="<%= article.permalink %>"><%= article.title %></a></h2>
+    <section>
+      <section class="details">
+        <span>
+          Posted on <time class="param"><%= article.date.strftime("%B %-d, %Y") %></time>
+          by <span class="param"><%= article.author %></span>
+          <% if article.category -%>
+          in <span class="param">
+            <a href="/<%= article.category %>/">
+              <%= article.category.gsub("-", " ").split.map(&:capitalize).join(" ") %>
+            </a>
+          </span>
+          <% end -%>
+        </span>
+      </section>
+      <section>
+        <%= article.summary %>
+        <% if article.has_more? -%>
+        <p><a href="<%= article.permalink %>">Read more &rarr;</a></p>
+        <% end -%>
+      </section>
+    </section>
+  </article>
+  <% end -%>
+</section>
+
+<!-- Pagination -->
+<div id="pagination">
+  <div class="left">
+    <% if @next_url -%>
+    <a href="<%= @next_url %>">&larr; Previous articles</a>
+    <% end -%>
+  </div>
+  <div class="right">
+    <% if @prev_url -%>
+    <a href="<%= @prev_url %>">Newer articles &rarr;</a>
+    <% end -%>
+  </div>
+</div>

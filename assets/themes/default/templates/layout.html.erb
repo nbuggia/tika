@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title><%= defined?(@page_title) && @page_title ? "#{@page_title} | #{@config["title"]}" : @config["title"] %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="<%= @config["description"] %>">
+  <% if @config["google_webmaster_tools"] -%>
+  <meta name="google-site-verification" content="<%= @config["google_webmaster_tools"] %>">
+  <% end -%>
+
+  <script type="text/javascript" src="//use.typekit.net/xgg5zca.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+  <link rel="alternate" type="application/atom+xml" href="/feed.atom" title="<%= @config["title"] %> Feed">
+  <link href="https://maxcdn.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-responsive.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link href="/static/css/theme.css" rel="stylesheet">
+</head>
+<body>
+  <!-- HEADER -->
+  <% @is_home ||= false -%>
+  <% if @is_home -%>
+  <div id="header" class="wrapper">
+    <div class="container-fluid content-strip">
+      <header>
+        <% if @config["header_image"] -%>
+        <p id="header-image"><a class="logo" href="/"><img src="<%= @config["header_image"] %>"></a></p>
+        <% end -%>
+        <p id="blog-title"><a href="/" class="blog-title subtle"><%= @config["title"] %></a></p>
+      </header>
+    </div>
+  </div>
+  <% else -%>
+  <div id="header" class="wrapper">
+    <div class="container-fluid content-strip">
+      <header>
+        <% if @config["header_image_small"] -%>
+        <p id="header-image"><a href="/" class="logo" title="<%= @config["title"] %> - home">
+          <img src="<%= @config["header_image_small"] %>"></a>
+        </p>
+        <% end -%>
+      </header>
+    </div>
+  </div>
+  <% end -%>
+
+  <!-- CONTENT -->
+  <div id="content" class="wrapper">
+    <div class="container-fluid content-strip">
+      <div class="row-fluid">
+        <div class="posts">
+          <%= yield_content %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <div id="navigation" class="wrapper navigation-wrapper">
+    <div class="container-fluid content-strip">
+      <div class="row-fluid">
+        <div class="span3">
+          <h4>Pages</h4>
+          <ul>
+            <% unless @is_home -%>
+            <li><a href="/">Home</a></li>
+            <% end -%>
+            <% Array(@pages).each do |p| -%>
+            <li><a href="<%= p.permalink %>"><%= p.title %></a></li>
+            <% end -%>
+            <li><a href="/archives/">Archives</a></li>
+          </ul>
+        </div>
+
+        <% if @categories && !@categories.empty? -%>
+        <div class="span3">
+          <h4>Categories</h4>
+          <ul>
+            <% @categories.sort.each do |cat_name, cat_articles| -%>
+            <li><a href="/<%= cat_name %>/">
+              <%= cat_name.gsub("-", " ").split.map(&:capitalize).join(" ") %>
+              (<%= cat_articles.size %>)
+            </a></li>
+            <% end -%>
+          </ul>
+        </div>
+        <% end -%>
+
+        <div class="span3">
+          <ul>
+            <% if @config["twitter"] -%>
+            <li>
+              <i class="fa-brands fa-twitter"></i>
+              <a href="https://twitter.com/<%= @config["twitter"] %>">Twitter</a>
+            </li>
+            <% end -%>
+            <% if @config["linkedin"] -%>
+            <li>
+              <i class="fa-brands fa-linkedin"></i>
+              <a href="https://linkedin.com/in/<%= @config["linkedin"] %>">LinkedIn</a>
+            </li>
+            <% end -%>
+            <% if @config["github"] -%>
+            <li>
+              <i class="fa-brands fa-github"></i>
+              <a href="https://github.com/<%= @config["github"] %>">GitHub</a>
+            </li>
+            <% end -%>
+            <% if @config["slideshare"] -%>
+            <li>
+              <i class="fa-brands fa-slideshare"></i>
+              <a href="https://slideshare.net/<%= @config["slideshare"] %>">Slideshare</a>
+            </li>
+            <% end -%>
+          </ul>
+        </div>
+
+        <div class="span3">
+          <ul>
+            <li>
+              <i class="fa-solid fa-rss"></i>
+              <a href="/feed.atom">Atom Feed</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div id="footer" class="wrapper footer-wrapper">
+    <div class="container-fluid content-strip">
+      <footer class="row-fluid">
+        <p>&copy; 2001-<script>document.write(new Date().getFullYear());</script> <%= @config["author"] %> &bull;
+          Powered by <a class="subtle" href="https://github.com/nbuggia/tika">Tika</a></p>
+      </footer>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="https://code.jquery.com/jquery-1.8.2.min.js" type="text/javascript"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="/static/js/image_alt.js" type="text/javascript"></script>
+
+  <% if @config["google_analytics_id"] -%>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=<%= @config["google_analytics_id"] %>"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '<%= @config["google_analytics_id"] %>');
+  </script>
+  <% end -%>
+</body>
+</html>

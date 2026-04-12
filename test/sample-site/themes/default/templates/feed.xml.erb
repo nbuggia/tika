@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><%= @config["title"] %></title>
+  <subtitle><%= @config["description"] %></subtitle>
+  <link href="<%= @config["base_url"] %>/feed.atom" rel="self"/>
+  <link href="<%= @config["base_url"] %>/"/>
+  <updated><%= @articles.first ? @articles.first.date.to_time.utc.iso8601 : Time.now.utc.iso8601 %></updated>
+  <id><%= @config["base_url"] %>/</id>
+  <author><name><%= @config["author"] %></name></author>
+  <% @articles.each do |article| -%>
+  <entry>
+    <title><%= article.title %></title>
+    <link href="<%= @config["base_url"] %><%= article.permalink %>"/>
+    <id><%= @config["base_url"] %><%= article.permalink %></id>
+    <updated><%= article.date.to_time.utc.iso8601 %></updated>
+    <author><name><%= article.author %></name></author>
+    <content type="html"><![CDATA[<%= @config["feed_show_full_article"] ? article.body : article.summary %>]]></content>
+  </entry>
+  <% end -%>
+</feed>

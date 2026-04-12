@@ -1,0 +1,47 @@
+body {font-family:"source-sans-pro", sans-serif; font-size: 18px; line-height:1.5em; color:#444;}
+h1, h2, h3 {font-family:"museo-sans", sans-serif; padding-top:0; margin-top:0;}
+h1 {font-size:2.6em; line-height:1.3em; color:#444;}
+h2 {color: #444; font-size: 1.8em;}
+h3 {text-transform: uppercase; font-size:1em; margin:0; padding-top:1em; padding-bottom:0.33em;}
+h4 {text-transform: uppercase; font-size:0.76em;}
+
+.small {font-size:0.8em;}
+.center {text-align: center;}
+.first {padding-top:0; margin-top:0;}
+
+a:link, a:hover, a:visited, a:active {color:#069;}
+a:link.subtle, a:hover.subtle, a:visited.subtle, a:active.subtle {color:#444;}
+
+/* Site Layout */
+div.content-strip {max-width: 960px; margin:0 auto;}
+
+#top-nav {background-color:#eee; border-bottom:1px solid #ccc;}
+
+#header {padding:0.5em 0 0.5em 0; border-bottom:1px solid #ccc;}
+#header nav a {margin-right: 1em; font-size: 0.9em; text-transform: uppercase; letter-spacing: 0.05em;}
+#blog-title {font-size:2em; margin:0;}
+
+#content {padding-top:2em; padding-bottom:5em;}
+
+#pagination {padding-top:1em; border-top:1px solid #ccc;}
+#pagination .left {width:50%; display:inline;}
+#pagination .right {width:50%; float:right; text-align:right;}
+
+#sidebar ul {list-style-type:none; margin-left:0;}
+#sidebar li {padding-top:0.3em; padding-bottom: 0.3em;}
+#sidebar p {line-height:1.5em; color:#888;}
+
+#footer {text-align:center; font-size:0.8em; line-height:0.8em; padding-top:1em; padding-bottom:1em; background-color:#eee; border-top:solid 1px #cecece;}
+#footer p {margin:1em 0 1em 0;}
+
+/* Index */
+#articles {}
+#articles ol {list-style-type:none; margin-left:0;}
+#articles li {width:100%; line-height:1.5em; padding-top:0.5em; padding-bottom: 0.5em;}
+
+/* Article */
+article .details {color:#888; font-size:0.8em; padding-bottom:1em;}
+article .details .param {text-transform:uppercase;}
+article li {line-height:1.3em; padding-top:0.3em; padding-bottom:0.3em;}
+article p {padding:0.5em 0 0.5em 0;}
+article table, article th, article td {border: 1px solid #444;}

@@ -1,0 +1,33 @@
+PATH
+  remote: .
+  specs:
+    tika (0.1.0)
+      kramdown (~> 2.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    docile (1.4.1)
+    kramdown (2.5.2)
+      rexml (>= 3.4.4)
+    minitest (5.25.4)
+    rake (13.3.1)
+    rexml (3.4.4)
+    simplecov (0.22.0)
+      docile (~> 1.1)
+      simplecov-html (~> 0.11)
+      simplecov_json_formatter (~> 0.1)
+    simplecov-html (0.13.2)
+    simplecov_json_formatter (0.1.4)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  minitest (~> 5.0)
+  rake
+  simplecov (~> 0.21)
+  tika!
+
+BUNDLED WITH
+   1.17.2
