@@ -151,6 +151,22 @@ class BuilderTest < TikaTest
     end
   end
 
+  def test_build_copies_downloads_when_present
+    in_site_dir do
+      FileUtils.mkdir_p("content/downloads")
+      File.write("content/downloads/report.pdf", "fake-pdf")
+      Tika::Builder.new(Tika::Config.load).build
+      assert File.exist?("build/downloads/report.pdf")
+    end
+  end
+
+  def test_build_skips_downloads_when_absent
+    in_site_dir do
+      Tika::Builder.new(Tika::Config.load).build
+      refute File.exist?("build/downloads"), "build/downloads should not be created when content/downloads is absent"
+    end
+  end
+
   # ---------------------------------------------------------------------------
   # Pagination
   # ---------------------------------------------------------------------------

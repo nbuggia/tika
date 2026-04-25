@@ -235,6 +235,10 @@ class SampleSiteTest < TikaTest
     assert File.exist?("build/static/css/theme.css")
   end
 
+  def test_downloads_copied_to_build
+    assert File.exist?("build/downloads/sample.txt")
+  end
+
   private
 
   def read(path)

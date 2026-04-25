@@ -141,6 +141,12 @@ module Tika
       if Dir.exist?(images_dir)
         FileUtils.cp_r(images_dir, File.join(@out, "images"))
       end
+
+      # Copy content/downloads if present
+      downloads_dir = File.join(@config["content_dir"], "downloads")
+      if Dir.exist?(downloads_dir)
+        FileUtils.cp_r(downloads_dir, File.join(@out, "downloads"))
+      end
     end
 
     # -------------------------------------------------------------------------

@@ -202,6 +202,8 @@ class CLITest < TikaTest
         assert File.exist?("my-blog/config.yml"), "config.yml should be copied"
         assert Dir.exist?("my-blog/content/articles")
         assert Dir.exist?("my-blog/content/drafts")
+        assert Dir.exist?("my-blog/content/images")
+        assert Dir.exist?("my-blog/content/downloads")
         assert Dir.exist?("my-blog/themes")
         assert_includes last_output, "my-blog"
       ensure

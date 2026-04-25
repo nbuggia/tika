@@ -179,7 +179,8 @@ CLI#build
        ├─ build_feed         # renders feed.xml.erb → build/feed.atom
        ├─ build_robots       # writes static robots.txt
        └─ copy_assets        # copies themes/<name>/static/ → build/static/
-                             # copies content/images/ → build/images/
+                             # copies content/images/    → build/images/
+                             # copies content/downloads/ → build/downloads/ (if present)
 ```
 
 Each render call goes through `Renderer#render`, which:

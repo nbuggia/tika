@@ -73,6 +73,7 @@ module Tika
       FileUtils.mkdir_p(File.join(name, "content", "pages"))
       FileUtils.mkdir_p(File.join(name, "content", "drafts"))
       FileUtils.mkdir_p(File.join(name, "content", "images"))
+      FileUtils.mkdir_p(File.join(name, "content", "downloads"))
       FileUtils.cp(File.join(example_site, "config.yml"), File.join(name, "config.yml"))
       FileUtils.cp_r(File.join(themes_src, "."), File.join(name, "themes"))
 

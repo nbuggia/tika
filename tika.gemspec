@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = "tika"
-  s.version     = "0.1.0"
+  s.version     = "0.1.1"
   s.summary     = "A static site generator"
   s.description = "Generates a static blog from Markdown/text files with ERB templates"
   s.author      = "Nathan Buggia"
@@ -16,5 +16,5 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency "minitest",  "~> 5.0"
   s.add_development_dependency "simplecov", "~> 0.21"
-  s.add_development_dependency "rake"
+  s.add_development_dependency "rake",      "~> 13.0"
 end

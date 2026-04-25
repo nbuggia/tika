@@ -6,7 +6,7 @@ Each criterion maps to a requirement in `spec/requirements.md`. Format: observab
 
 | ID    | Req  | Criterion                                                                                                                                                |
 | ----- | ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| AC1.1 | R1.1 | `tika init mysite` creates `mysite/` containing `config.yml`, `content/articles/`, `content/pages/`, `content/drafts/`, `content/images/`, and `themes/` |
+| AC1.1 | R1.1 | `tika init mysite` creates `mysite/` containing `config.yml`, `content/articles/`, `content/pages/`, `content/drafts/`, `content/images/`, `content/downloads/`, and `themes/` |
 | AC1.2 | R1.2 | `mysite/config.yml` is valid YAML with all required keys present                                                                                         |
 | AC1.3 | R1.3 | `tika init mysite` when `mysite/` already exists prints an error containing "already exists" and exits non-zero                                          |
 
@@ -34,6 +34,8 @@ Each criterion maps to a requirement in `spec/requirements.md`. Format: observab
 | AC3.8  | R3.8  | `content/pages/about.md` produces `build/about/index.html` containing the page body                                        |
 | AC3.9  | R3.9  | `build/feed.atom` is well-formed XML with an `<entry>` element for each article (up to `feed_entries`)                     |
 | AC3.10 | R3.10 | `build/robots.txt` exists after a build                                                                                    |
+| AC3.13 | R3.13 | Files in `content/downloads/` appear at identical relative paths under `build/downloads/` after a build                    |
+| AC3.14 | R3.13 | If `content/downloads/` does not exist, `build/downloads/` is not created                                                  |
 | AC3.11 | R3.2  | Running `tika build` twice in a row produces identical output (idempotent)                                                 |
 | AC3.12 | R3.2  | Files present in `build/` from a previous build but no longer generated are removed                                        |
 

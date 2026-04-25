@@ -14,6 +14,8 @@ content/
     other-authors/      # category: other-authors
   pages/
     about.md            # becomes /about/
+  images/               # copied verbatim to build/images/
+  downloads/            # copied verbatim to build/downloads/
 themes/
   default/              # ERB templates and CSS
 build/                  # generated output (created on build, not committed)
@@ -58,6 +60,26 @@ Page content here.
 ```
 
 Pages appear in the site navigation automatically and are served at `/slug/`.
+
+## Downloads
+
+Place any files you want to make available for download in `content/downloads/`. The entire directory is copied
+verbatim to `build/downloads/` at build time, preserving subdirectories.
+
+```text
+content/downloads/
+  resume.pdf
+  data/
+    dataset-2024.csv
+```
+
+Link to them in articles or pages using the `/downloads/` path:
+
+```markdown
+[Download my resume](/downloads/resume.pdf)
+```
+
+The directory is optional — if it doesn't exist, nothing is copied and no `build/downloads/` directory is created.
 
 ## Drafts
 

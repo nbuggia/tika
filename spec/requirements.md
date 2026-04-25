@@ -36,6 +36,7 @@ Pages, Netlify, rsync target).
 - R3.8: Custom pages are rendered to `build/<slug>/index.html`
 - R3.9: An Atom feed is generated at `build/feed.atom`
 - R3.10: A `robots.txt` is generated at `build/robots.txt`
+- R3.13: If `content/downloads/` exists, its contents are copied verbatim to `build/downloads/`
 - R3.11 `[planned]`: A `sitemap.xml` is generated at `build/sitemap.xml` and referenced in `robots.txt`
 - R3.12 `[planned]`: A `404.html` is generated from a `404.html.erb` theme template
 

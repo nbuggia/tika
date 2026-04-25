@@ -42,6 +42,7 @@ CLI#cmd_build
        ├─ build_robots       → static string                → build/robots.txt
        └─ copy_assets        → themes/<name>/static/        → build/static/
                              → content/images/              → build/images/
+                             → content/downloads/ (if present) → build/downloads/
 ```
 
 ## Rendering Pipeline
